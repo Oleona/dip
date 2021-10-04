@@ -16,7 +16,7 @@ namespace test9.Controllers
     {
         WeatherContext db = new WeatherContext();
         private String Year;
-
+        
         // GET: Myarchive
 
         public ActionResult Index()
@@ -64,7 +64,33 @@ namespace test9.Controllers
                 && (pressure <= (t.Pressure * 1.05)&&pressure>=t.Pressure*0.95)
                 &&(DateHour<=t.Time+3)&&(DateHour>=t.Time-3)
                 )).ToList();
-                return View(archive);
+                
+                List<int> dataSelect= new List<int>();
+                foreach (Archive b in data)
+               
+                    {
+                        dataSelect.Add((int)b.Day+1);
+                    dataSelect.Add((int)b.Month);
+                    dataSelect.Add((int)b.Year);
+                }
+                List<Archive> data1 = new List<Archive>();
+                List<Archive> data2 = new List<Archive>();
+                for (int i=0;i<dataSelect.Count;i+=3)
+                {
+                    var myDay = dataSelect[i];
+                    var myMonth = dataSelect[i+1];
+                    var myYear = dataSelect[i + 2];
+                    var prognozList = db.Archives.Where(v=> v.Day == myDay && v.Month == myMonth && v.Year== myYear);
+                    
+                       data1 = prognozList.ToList();
+                    foreach (Archive n in data1)
+                        { 
+                    data2.Add(n);}
+                }
+
+                
+
+                    return View(archive);
             }
             else
             {
