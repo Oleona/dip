@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    
+        <div class="season">
+            <table id="three">
+                @if (ViewBag.Archive != null)
+                {
+                  
+                        <tr>
+                            <td><p>температура</p><p>@ViewBag.Archive.Temperature</p></td>
+                            <td><p>влажность</p><p>@ViewBag.Archive.Humidity</p></td>
+                            <td><p>давление</p><p>@ViewBag.Archive.Pressure</p></td>
+                        </tr>
+                }
+            </table>
+        </div>
+
+    
+</body>
+</html>

@@ -1,0 +1,324 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/Site.css")
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/Scripts/JavaScriptweather.js")
+
+    <meta charset="utf-8">
+    <meta name="description" content="Погода в Петербурге по сезонам">
+    <meta name="keywords" content="Погода, Петербург, весна, лето, зима, осень, приметы, информер">
+    <meta name="author" content="© Ольга">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О погоде в Петербурге</title>
+
+</head>
+
+<body>
+    <div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            @Html.ActionLink("logout...", "Logoff")
+        }
+        else
+        {
+            @Html.ActionLink("login", "Login")
+            @Html.Label(" | ");
+            @Html.ActionLink("register", "Register")
+        }
+    </div>
+    <div id="context">
+        <ul class="context-menu">
+
+            <li><a href="#" class="hidden"> Назад</a></li>
+            <li><a href="#" class="hidden">Вперед</a></li>
+            <li><a href="#" class="hidden">Перезагрузить</a></li>
+            <li><a href="#" class="hidden">Сохранить как...</a></li>
+            <li><a href="#" class="hiddenimg">Изображение защищено авторским правом и его нельзя скачать</a></li>
+
+        </ul>
+    </div>
+    <header>
+        <img height="300" src="@Url.Content("~/Content/image/main.jpg")" class="center-img" id="noContextMenu">
+        <h1>У природы нет плохой погоды..?</h1>
+        <h2 class="top">
+            Тогда мы идем к вам!
+        </h2>
+        <div> <img id="prognoz" src="@Url.Content("~/Content/image/rain.jpg")" class="center-img"> </div>
+        <div class="container">
+            <div class="video">
+                <video id="myvideo" autoplay="autoplay" loop="loop">
+
+                    <source src="@Url.Content("~/Content/Video/rainl.mp4")" />
+                </video>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+
+        <section>
+            <article class="interline">
+                <p id="p">
+                    <br> На нашем сайте Вы найдете информацию о текущей погоде в Петербурге, о погодных
+                    закономерностях и
+                    статистике.
+                    <br> <br>
+                    <h3>А может быть вас интересует, когда в Петербурге был самый холодный или самый жаркий день?</h3>
+
+                    <h3>Или Вы хотите узнать, что предскажут народные приметы?</h3>
+                </p>
+            </article>
+
+            <form id="Form1" action="/Home/Index" method="post">
+                <p> Введите дату для получения экстремальных значений и примет</p>
+                <p><input type="text" id="dayMonth" name="dayMonth" /> </p>
+                <div class="inter">
+                    <p>
+                        <input type="submit" class="send" id="SendButton" value="ПОСМОТРЕТЬ ЭКСТРЕМУМЫ" />
+                        <input type="button" class="send" id="SendButtonn" value="ПОСМОТРЕТЬ ПРИМЕТЫ" />
+
+                    </p>
+                </div>
+            </form>
+            <div class="season">
+                <p>  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;                         </p>
+            </div>
+            <div class="season">
+                <table id="one">
+                    @if (ViewBag.Extremum != null)
+                    {
+                        <tr id="zaproskbase" runat="server">
+                            <td><p>дата</p><p>@ViewBag.Extremum.Day_Month</p></td>
+                            <td><p>минимум</p><p>@ViewBag.Extremum.Minimum</p></td>
+                            <td><p>год минимума</p><p>@ViewBag.Extremum.Minimum_Year</p></td>
+                            <td><p>максимум</p><p>@ViewBag.Extremum.Maximum</p></td>
+                            <td><p>год максимума</p><p>@ViewBag.Extremum.Maximum_Year</p></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="season">
+                <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;                         </p>
+            </div>
+            <div class="season">
+                <table id="two" display: none;>
+                    @if (ViewBag.Extremum != null)
+                    {
+                        <tr id="zaproskbasee" runat="server">
+
+                            <td class="any" display: none;><p>примета</p><p>@ViewBag.Extremum.SignText</p></td>
+
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <br> <br>
+
+
+            <article class="interline">
+                Также вы можете перейти на страницы сезонов и познакомиться подробнее с особенностями погоды по
+                месяцам и погодными приметами
+            </article>
+
+            <div class="href">
+                <a href="/Home/Spring" target="_blank">
+                    <h3>ВЕСНА</h3>
+                </a>
+                <a href="/Home/Summer" target="_blank">
+                    <h3>ЛЕТО</h3>
+                </a>
+                <a href="/Home/Authumn" target="_blank">
+                    <h3>ОСЕНЬ</h3>
+                </a>
+                <a href="/Home/Winter" target="_blank">
+                    <h3>ЗИМА</h3>
+                </a>
+                <br><br>
+            </div>
+
+        </section>
+        <section>
+            <article class="interline">
+                <p>
+                    <br> Поэты "серебряного века" и не только, не могли обойти вниманием Питерскую погоду. Часть цитат Вы
+                    можете увидеть на страницах сезонов.
+                    <br>
+                    Для тех же, кто посетил наш город летом, и все еще путает туризм с эмиграцией, рекомендуем
+                    насладиться небольшой подборкой от классиков:
+                    <br>
+                </p>
+            </article>
+        </section>
+        <section>
+
+            <article class="season">
+                <h3> О зиме </h3>
+                <p class="interline">
+                    Гранитный город славы и беды,<br>
+                    Широких рек сияющие льды,<br>
+                    Бессолнечные, мрачные сады…
+                    <cite> Анна Ахматова, 1915 </cite>
+                    <br>
+                    Желтый пар петербургской зимы,<br>
+                    Желтый снег, облипающий плиты...
+                    <cite> Иннокентий Анненский, 1909 </cite>
+
+                </p>
+            </article>
+            <article class="season">
+                <h3> О лете </h3>
+                <p class="interline">
+                    Здесь говорят, что середь года<br>
+                    Выходит солнце только раз…<br>
+                    Блеснёт и спрячется тотчас…
+                    <cite> Николай Огарёв, 1840 </cite>
+                    <br>
+                    В небе - пыль либо тучи,<br>
+                    Либо жар, либо громы...
+                    <cite> Николай Коншин, 1828 </cite>
+
+                </p>
+            </article>
+            <article class="season">
+                <h3> О весне </h3>
+                <p class="interline">
+                    Даже в мае, когда разлиты<br>
+                    Белой ночи над волнами тени,<br>
+                    Там не чары весенней мечты,<br>
+                    Там отрава бесплодных хотений
+                    <cite> Иннокентий Анненский, 1909 </cite>
+
+                </p>
+            </article>
+            <article class="season">
+                <h3> Об осени </h3>
+                <p class="interline">
+                    И вот опять ползут косматые туманы<br>
+                    Из северных болот и сумрачных лесов…
+                    <cite> Аполлон Коринфский, 1891 </cite>
+                    <br>
+                    Начинается день безобразный –<br>
+                    Мутный, ветреный, тёмный и грязный.<br>
+                    Ах, ещё бы на мир нам с улыбкой смотреть!<br>
+                    Мы глядим на него через тусклую сеть,<br>
+                    Что как слёзы струится по окнам домов<br>
+                    От туманов сырых, от дождей и снегов!..
+
+                    <cite> Николай Некрасов, 1859 </cite>
+                    <br>
+                    И хмурый Петроград с туманом и дождём<br>
+                    Напоминает мне своей немой печалью<br>
+                    Красавицу с заплаканным лицом…
+
+                    <cite> Николай Агнивцев, 1915 </cite>
+                    <br>
+                    Как тускло пурпурное пламя,<br>
+                    Как мертвы желтые утра!<br>
+                    ..............................<br>
+                    В тумане солнце, как в неволе…
+
+                    <cite> Иннокентий Анненский, 1904 </cite>
+                    <br>
+                    Небо – вечно в тумане,<br>
+                    Почва – вечно в мокроте:<br>
+                    Как в поганой лохани,<br>
+                    На поганом болоте!..
+
+                    <cite>Василий Князев — Из цикла «Проклятый город», 1914 </cite>
+                </p>
+            </article>
+        </section>
+        <br>
+        <br>
+        <table id="sun-rain-days">
+            <caption>
+                <h2 id="table-wright">Погода по месяцам в Петербурге</h2>
+            </caption>
+            <thead>
+                <tr>
+                    <td rowspan="3"></td>
+                    <th colspan="12">Погода по месяцам</th>
+                </tr>
+                <tr>
+                    <th>январь</th>
+                    <th>февраль</th>
+                    <th>март</th>
+                    <th>апрель</th>
+                    <th>май </th>
+                    <th>июнь </th>
+                    <th>июль </th>
+                    <th>август </th>
+                    <th>сентябрь </th>
+                    <th>октябрь </th>
+                    <th>ноябрь </th>
+                    <th>декабрь </th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>солнечных дней</td>
+                    <td>3</td>
+                    <td>3</td>
+                    <td>8</td>
+                    <td>12</td>
+                    <td>14</td>
+                    <td>12</td>
+                    <td>10</td>
+                    <td>10</td>
+                    <td>9</td>
+                    <td>6</td>
+                    <td>3</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>пасмурных дней</td>
+                    <td>21</td>
+                    <td>19</td>
+                    <td>14</td>
+                    <td>10</td>
+                    <td>14</td>
+                    <td>16</td>
+                    <td>18</td>
+                    <td>17</td>
+                    <td>17</td>
+                    <td>19</td>
+                    <td>21</td>
+                    <td>20</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <form id="Form3" action="/Myarchive/Index" method="post">
+            <p> введите год прогноза</p>
+            <p><input type="number" name="Year" /></p>
+            
+            <div class="inter">
+                <p>
+                    <input type="submit" class="send" id="SendButton" value="ПОСМОТРЕТЬ ПРОГНОЗ" />
+                </p>
+            </div>
+        </form>
+
+
+
+
+    </main>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/JavaScriptweather.js")
+    @Scripts.Render("~/Scripts/JavaScriptweather2.js")
+</body>
+
+</html>
+<!--<script charset="utf-8" src="./js/jquery-3.6.0.js"></script>!-->
+<script charset="utf-8" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script charset="utf-8" src="@Url.Content("~/Scripts/ JavaScriptweather.js.js")"></script>
+<script charset="utf-8" src="@Url.Content("~/Scripts/ JavaScriptweather2.js")"></script>

@@ -1,0 +1,423 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:ital,wght@0,400;0,600;1,400&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+body {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    margin: 15px;
+    background-color: rgb(231, 233, 235);
+    
+}
+
+#p {
+    font: size 1.5em;
+    
+    font-weight: 400;
+}
+
+.center-img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100vw;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Pacifico', sans-serif;
+    font-weight: 400;
+    margin: 0 auto;
+}
+
+h2 {
+    font-family: 'Pacifico', sans-serif;
+    font-weight: 400;
+    margin: 0 auto;
+}
+
+.align-right {
+    text-align: right;
+    white-space: pre;
+    max-height: 30px;
+}
+
+.season {
+    vertical-align: top;
+    max-width: 23%;
+    display: inline-block;
+    padding: 5px;
+    margin: auto;
+}
+
+    .season cite {
+        font-family: 'Pacifico', sans-serif;
+        font-size: 15px;
+        padding-top: 10px;
+        display: block;
+        text-align: right;
+    }
+
+#visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    
+}
+
+
+.top {
+    vertical-align: top;
+    display: inline-block;
+    padding: 5px;
+    margin: auto;
+    text-align: right;
+    width: 100% !important;
+    margin-left: -50px;
+}
+
+    .top cite {
+        font-family: 'Pacifico', sans-serif;
+        font-size: 15px;
+        padding-top: 10px;
+        display: block;
+        text-align: right;
+    }
+
+#table-wright {
+    font-family: 'Rubik', sans-serif;
+}
+
+
+
+
+#sun-rain-days {
+    text-align: center;
+    border: 1px double black;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+TD, TH {
+    padding: 3px; /* Поля вокруг содержимого таблицы */
+    border: 1px solid black; /* Параметры рамки */
+}
+
+
+a {
+    float: left;
+    width: 25%;
+    text-decoration: none;
+    text-align: top;
+}
+
+    a:active, a:hover {
+        color: rgb(122, 8, 8); /* Красный цвет текста */
+    }
+
+table:hover {
+    box-shadow: 0px 3px 3px -3px #667575;
+}
+
+
+.seasons {
+    
+    column-count: 3;
+    vertical-align: top;
+    display: inline-block;
+    padding: 5px;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+.dec {
+    margin: 0;
+}
+
+.primetav, .primetao, .primetal, .primetaz {
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+}
+
+
+
+
+
+.overflow {
+    max-height: 250px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.hide {
+    display: none;
+}
+
+    .hide + label ~ article {
+        display: none;
+    }
+    /* оформляем текст label */
+    .hide + label {
+        padding: 0;
+        color: rgb(75, 104, 75);
+        cursor: pointer;
+        display: inline-block;
+    }
+    /* вид текста label при активном переключателе */
+    .hide:checked + label {
+        color: red;
+        border-bottom: 0;
+    }
+        /* когда чекбокс активен показываем блоки с содержанием  */
+        .hide:checked + label + article {
+            display: block;
+            background: #efefef;
+            box-shadow: inset 3px 3px 10px #667575;
+            padding: 10px;
+        }
+
+.primetav::before {
+    content: "♥";
+}
+
+.sm-input {
+    border-radius: 3px;
+}
+
+
+
+.primetal::after {
+    content: "✿";
+}
+
+.primetaz::after {
+    content: "\2745";
+}
+
+.primetao::after {
+    content: "☂";
+}
+
+
+    .href {
+    width: 90%;
+    max-width: 450px;
+    margin: 2em auto;
+    padding: 4em;
+    background: rgb(195, 250, 250);
+    box-shadow: 0 0 4em 4em rgb(231, 233, 235) inset;
+}
+
+.send {
+    width: 70%;
+    max-width: 350px;
+    max-height: 50px;
+    margin: 1em auto;
+    padding: 3em;
+    background: rgb(195, 250, 250);
+    box-shadow: 0 0 2em 2em rgb(231, 233, 235) inset;
+    
+    color: blue;
+}
+
+.inter {
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+
+#dayMonth {
+    text-align: center;
+    display: block;
+    width: 70%;
+    max-width: 250px;
+    margin: 1em auto;
+    padding: 1em;
+    background: rgb(195, 250, 250);
+    box-shadow: 0 0 1em 1em rgb(231, 233, 235) inset;
+    font-family: 'Rubik', sans-serif;
+    color: blue;
+}
+
+.interline {
+    line-height: 1.5;
+    font-size: large;
+}
+
+#dalee {
+    border: none;
+}
+
+#skrit {
+    border: none;
+}
+
+.block {
+    max-width: 600px;
+    min-height: 50px;
+    padding: 0 35px;
+    position: relative;
+    left: 0;
+    text-align: justify;
+    font-size: 18px;
+    font-family: 'Rubik', sans-serif;
+}
+
+    .block span {
+        display: none;
+        position: absolute;
+        top: 35px;
+        left: -2px;
+        z-index: 1;
+        max-width: 600px;
+        padding-left: 35px;
+        padding-right: 10px;
+        padding-bottom: 20px;
+        text-align: left;
+        background: #FDFDFD;
+        border-bottom: 2px solid #ccc;
+        border-left: 2px solid #ccc;
+        border-right: 2px solid #ccc;
+    }
+
+    .block:hover span {
+        display: block;
+        cursor: pointer;
+        height: auto;
+    }
+
+#myvideo {
+    display: none;
+    max-width: 320px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+#prognoz {
+    width: 320px;
+    height: 180px;
+    margin: 30 auto;
+}
+
+button,
+button:active,
+button:focus {
+    outline: none !important;
+}
+
+.menu {
+    list-style: none;
+    max-width: 90%;
+    position: relative;
+    left: 0px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+}
+
+.submenu {
+    list-style: none;
+    padding: 0px;
+    border: 1px solid #aaa;
+    background-color: rgb(221, 223, 224);
+    box-shadow: 2px 2px 5px rgba(0,0,0,.3);
+    position: absolute;
+    width: 200px;
+    left: 24vw;
+    display: none;
+}
+
+    .submenu a {
+        text-decoration: none;
+        padding: 10px 30px;
+        display: block;
+        color: #333;
+        text-shadow: none;
+        font-weight: 700;
+        width: 200px;
+    }
+
+        .submenu a:hover {
+            background: #f5f4f4;
+            width: 140px;
+        }
+
+    .submenu.active {
+        display: block;
+    }
+
+.menu-trigger {
+    width: 300px !important;
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+    position: relative;
+}
+
+.dropdowncontent {
+    display: none;
+}
+
+.decada {
+    width: 500px !important;
+    text-align: justify;
+    padding-left: 120px;
+    background-color: rgb(221, 223, 224);
+    box-shadow: 2px 2px 5px rgba(0,0,0,.3);
+}
+
+
+#context {
+    display: inline-block;
+    position: absolute;
+    background: #fff;
+    box-shadow: 2px 2px 15px rgba(0,0,0,.5);
+    display: none;
+}
+
+.context-menu {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.any {
+    display: none;
+    visibility: hidden;
+    box-suppress: hide;
+}
+#two {
+    
+    box-suppress: hide;
+}
+
+.context-menu a {
+    display: block;
+    width: 200px;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    text-shadow: none;
+    font-weight: 600;
+}
+
+        .context-menu a:hover {
+            background: #ddd;
+        }
+
+        .context-menu a.hidden {
+            display: none;
+        }
+
+            .context-menu a.hidden.shown {
+                display: block;
+            }
+
+       
