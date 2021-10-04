@@ -297,12 +297,12 @@
         </table>
 
         <form id="Form3" action="/Myarchive/Index" method="post">
-            <p> введите год прогноза</p>
-            <p><input type="number" name="Year" /></p>
-            
+            <!--<p> введите год прогноза</p>!
+    <p><input type="number" name="1970" /></p>-->
+
             <div class="inter">
                 <p>
-                    <input type="submit" class="send" id="SendButton" value="ПОСМОТРЕТЬ ПРОГНОЗ" />
+                    <input type="submit" class="send" id="SendButton" value="ПОСМОТРЕТЬ ПРОГНОЗ" name="Year"/>
                 </p>
             </div>
         </form>
@@ -310,15 +310,15 @@
 
 
 
-    </main>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Scripts/JavaScriptweather.js")
-    @Scripts.Render("~/Scripts/JavaScriptweather2.js")
-</body>
+        </main>
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @Scripts.Render("~/Scripts/JavaScriptweather.js")
+        @Scripts.Render("~/Scripts/JavaScriptweather2.js")
+    </body>
 
-</html>
-<!--<script charset="utf-8" src="./js/jquery-3.6.0.js"></script>!-->
-<script charset="utf-8" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script charset="utf-8" src="@Url.Content("~/Scripts/ JavaScriptweather.js.js")"></script>
-<script charset="utf-8" src="@Url.Content("~/Scripts/ JavaScriptweather2.js")"></script>
+    </html>
+    <!--<script charset="utf-8" src="./js/jquery-3.6.0.js"></script>!-->
+            <script charset="utf-8" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+            <script charset="utf-8" src="@Url.Content("~/Scripts/ JavaScriptweather.js.js")"></script>
+            <script charset="utf-8" src="@Url.Content("~/Scripts/ JavaScriptweather2.js")"></script>

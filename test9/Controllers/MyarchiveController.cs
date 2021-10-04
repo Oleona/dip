@@ -15,7 +15,7 @@ namespace test9.Controllers
     public class MyarchiveController : Controller
     {
         WeatherContext db = new WeatherContext();
-        private int Year;
+        private String Year;
 
         // GET: Myarchive
 
@@ -33,14 +33,11 @@ namespace test9.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Index(int Year)
+        public async Task<ActionResult> Index(String Year)
         {
 
             if (User.Identity.IsAuthenticated)
             {
-
-
-
                 this.Year = Year;
                
                // var archive = db.Archives.First(e => e.Year == Year);
@@ -59,8 +56,8 @@ namespace test9.Controllers
                 double temp = Double.Parse(Temp, CultureInfo.InvariantCulture);
                 double pressure = Double.Parse(Pressure, CultureInfo.InvariantCulture);
                  //var archive = db.Archives.FirstOrDefault(e => e.Year == Year);
-                var archive = db.Archives.Where(t => t.Temperature >= temp).FirstOrDefault() ;
-ViewBag.Archive = archive;
+                var archive = db.Archives.Where(t =>(temp<= (t.Temperature*1.1))).FirstOrDefault() ;
+                 ViewBag.Archive = archive;
                 return View(archive);
             }
             else
