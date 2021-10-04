@@ -17,11 +17,14 @@
                 @if (ViewBag.Archive != null)
                 {
                   
-                        <tr>
-                            <td><p>температура</p><p>@ViewBag.Archive.Temperature</p></td>
-                            <td><p>влажность</p><p>@ViewBag.Archive.Humidity</p></td>
-                            <td><p>давление</p><p>@ViewBag.Archive.Pressure</p></td>
-                        </tr>
+                <tr>
+                    <td><p>температура</p><p>@ViewBag.Archive.Temperature</p></td>
+                    <td><p>влажность</p><p>@ViewBag.Archive.Humidity</p></td>
+                    <td><p>давление</p><p>@ViewBag.Archive.Pressure</p></td>
+                    <td><p>год</p><p>@ViewBag.Archive.Year</p></td>
+                    <td><p>месяц</p><p>@ViewBag.Archive.Month</p></td>
+                    <td><p>день</p><p>@ViewBag.Archive.Day</p></td>
+                </tr>
                 }
             </table>
         </div>
