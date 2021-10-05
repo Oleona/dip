@@ -47,25 +47,29 @@ namespace test9.Controllers
                 int DateHour = DateTime.Now.Hour;
 
                 HttpClient client = new HttpClient();
-                HttpResponseMessage response = await client.GetAsync("https://api.openweathermap.org/data/2.5/weather?q=%20Saint%20Petersburg,ru&appid=c986959d1fd2ecb4376e73e676671d28&units=metric");
+                HttpResponseMessage response = await client.GetAsync(
+                    "https://api.openweathermap.org/data/2.5/weather?q=%20Saint%20Petersburg,ru&appid=c986959d1fd2ecb4376e73e676671d28&units=metric");
                 var stringResult = await response.Content.ReadAsStringAsync();
                 var rawWeather = JsonConvert.DeserializeObject<OpenWeatherResponse>(stringResult);
-                String Humidity = rawWeather.Main.Humidity;
-                String Temp = rawWeather.Main.Temp;
-                String Pressure = rawWeather.Main.Pressure;
-                int humidity = Int32.Parse(Humidity);
+
+                int humidity = Int32.Parse(rawWeather.Main.Humidity);
                 //без CultureInfo была ошибка из за преобразования разделителя в виде запятой
-                double temp = Double.Parse(Temp, CultureInfo.InvariantCulture);
-                double pressure = Double.Parse(Pressure, CultureInfo.InvariantCulture);
-                //var archive = db.Archives.FirstOrDefault(e => e.Year == Year);
-                var archive = db.Archives.Where(t => (temp <= (t.Temperature * 1.05)) && (humidity <= (t.Humidity * 1.05)) && (pressure <= (t.Pressure * 1.05))).FirstOrDefault();
-                // ViewBag.Archive = archive;
-                List<Archive> data = db.Archives.Where(t =>
-                (temp <= (t.Temperature * 1.05) && temp >= (t.Temperature * 0.95)
-                && (humidity <= (t.Humidity * 1.05) && humidity >= t.Humidity * 0.95)
-                && (pressure <= (t.Pressure * 1.05) && pressure >= t.Pressure * 0.95)
-                && (DateHour <= t.Time + 1) && (DateHour >= t.Time - 1)
-                )).ToList();
+                double temp = Double.Parse(rawWeather.Main.Temp, CultureInfo.InvariantCulture);
+                double pressure = Double.Parse(rawWeather.Main.Pressure, CultureInfo.InvariantCulture);
+
+                var archive = db.Archives
+                    .Where(t => temp <= t.Temperature * 1.05)
+                    .Where(t => humidity <= t.Humidity * 1.05)
+                    .Where(t => pressure <= t.Pressure * 1.05)
+                    .FirstOrDefault();
+
+                var data = db.Archives
+                    .Where(t => temp <= t.Temperature * 1.05 && temp >= t.Temperature * 0.95)
+                    .Where(t => humidity <= t.Humidity * 1.05 && humidity >= t.Humidity * 0.95)
+                    .Where(t => pressure <= t.Pressure * 1.05 && pressure >= t.Pressure * 0.95)
+                    .Where(t => DateHour <= t.Time + 1 && DateHour >= t.Time - 1)
+                    .ToList();
+
                 //датаселект- хранит даты данных из data поэтому он в 3 раза длиннее- для каждого значения из data идет день месяц год
                 List<int> dataSelect = new List<int>();
                 foreach (Archive b in data)
@@ -220,13 +224,24 @@ namespace test9.Controllers
                 StringBuilder resultToBase = new StringBuilder();
                 foreach (Result r in res)
                 {
-                    resultToBase.Append(r.tempe.ToString()+" ");
+                    resultToBase.Append(r.tempe.ToString() + " ");
                     resultToBase.Append(r.pres.ToString() + " ");
                     resultToBase.Append(r.humi.ToString() + " ");
                 }
-                String forecastToBase = resultToBase.ToString();
-                //db.Forecasts.Add(new Forecast { Prediction = forecastToBase });
-                //db.SaveChanges();
+
+                var forecastToBase = resultToBase.ToString();
+                var newForecast = new Forecast { Prediction = forecastToBase };
+                db.Forecasts.Add(newForecast);
+
+                var userId = db.Users.Where(u => u.Login == User.Identity.Name).Select(u => u.Id).SingleOrDefault();
+                var request = new Request { UserId = userId };
+                db.Requests.Add(request);
+
+                await db.SaveChangesAsync();
+
+                request.ForecastId = newForecast.Id;
+                await db.SaveChangesAsync();
+                
 
                 return View(res);
             }

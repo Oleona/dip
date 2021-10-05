@@ -22,6 +22,10 @@ namespace test9.Controllers
         [HttpPost]
         public ActionResult Index(string dayMonth)
         {
+            if (string.IsNullOrEmpty(dayMonth))
+            {
+                return View();
+            }
 
             // получаем из бд все объекты Extremum
             var extremum = db.Extrema.SingleOrDefault(e => e.Day_Month == dayMonth);
