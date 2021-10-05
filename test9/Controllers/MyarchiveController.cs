@@ -16,7 +16,9 @@ namespace test9.Controllers
     {
         WeatherContext db = new WeatherContext();
         private String Year;
-        
+        double tempe;
+        int humi;
+        double pres;
         // GET: Myarchive
 
         public ActionResult Index()
@@ -81,16 +83,38 @@ namespace test9.Controllers
                     var myMonth = dataSelect[i+1];
                     var myYear = dataSelect[i + 2];
                     var prognozList = db.Archives.Where(v=> v.Day == myDay && v.Month == myMonth && v.Year== myYear);
-                    
-                       data1 = prognozList.ToList();
+                    //data1 каждый раз содержит 8 значений- на дату по срокам
+                    data1 = prognozList.ToList();
                     foreach (Archive n in data1)
                         { 
+                        //data2 содержит все данные подходящих прогнозов на след день со сроками чуть меньше чем 8*data.count т.к пренебрегла переходом на след.месяц
+                        // для граничных дней типа 30 сент-31 сент не существует
                     data2.Add(n);}
                 }
-
+               // List<Archive> data3 = new List<Archive>();
                 
+                foreach(Archive p in data2)
+                {
+                    if (p.Temperature.HasValue)
+                    {
+                        tempe += p.Temperature.Value;
+                    }
+                    if (p.Humidity.HasValue)
+                    { 
+                        humi += p.Humidity.Value;
+                        if(p.Pressure.HasValue)
+                        {
+                    pres += p.Pressure.Value;} }
+                }
+                tempe = tempe / data2.Count;
+                humi = humi / data2.Count;
+                pres = pres / data2.Count;
 
-                    return View(archive);
+                List<Result> res = new List<Result>();
+                //res.Add(tempe,humi,pres);
+                   
+
+                return View(archive);
             }
             else
             {

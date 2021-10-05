@@ -138,4 +138,12 @@ namespace test9.Models
         public string Pressure { get; set; }
     }
 
+    public class Result
+    {
+        public int srok { get; set; }
+        public double tempe { get; set; }
+        public int humi { get; set; }
+        public double pres { get; set; }
+    }
+
 }
