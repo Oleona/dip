@@ -11,24 +11,81 @@
     <title>Index</title>
 </head>
 <body>
-    
-        <div class="season">
-            <table id="three">
-                @if (ViewBag.Archive != null)
-                {
-                  
-                <tr>
-                    <td><p>температура</p><p>@ViewBag.Archive.Temperature</p></td>
-                    <td><p>влажность</p><p>@ViewBag.Archive.Humidity</p></td>
-                    <td><p>давление</p><p>@ViewBag.Archive.Pressure</p></td>
-                    <td><p>год</p><p>@ViewBag.Archive.Year</p></td>
-                    <td><p>месяц</p><p>@ViewBag.Archive.Month</p></td>
-                    <td><p>день</p><p>@ViewBag.Archive.Day</p></td>
-                </tr>
-                }
-            </table>
-        </div>
 
-    
+    <!--  <div class="season">
+                <table id="three">
+                    @if (ViewBag.Archive != null)
+                    {
+
+                    <tr>
+                        <td><p>температура</p><p>@ViewBag.Archive.Temperature</p></td>
+                        <td><p>влажность</p><p>@ViewBag.Archive.Humidity</p></td>
+                        <td><p>давление</p><p>@ViewBag.Archive.Pressure</p></td>
+                        <td><p>год</p><p>@ViewBag.Archive.Year</p></td>
+                        <td><p>месяц</p><p>@ViewBag.Archive.Month</p></td>
+                        <td><p>день</p><p>@ViewBag.Archive.Day</p></td>
+                    </tr>
+                    }
+                </table>
+            </div>-->
+
+    <div class="season">
+        <table id="three">
+            <thead>
+                <tr>
+                    <td rowspan="3"></td>
+                    <th colspan="4">
+                        Прогноз погоды на
+                        <script language="javascript" type="text/javascript">
+<!--
+                            var d = new Date();
+
+                            var day = new Array("Воскресенье", "Понедельник", "Вторник",
+                                "Среда", "Четверг", "Пятница", "Суббота");
+
+                            var month = new Array("января", "февраля", "марта", "апреля", "мая", "июня",
+                                "июля", "августа", "сентября", "октября", "ноября", "декабря");
+
+                            document.write(day[d.getDay()+1] + " " + d.getDate() + " " + month[d.getMonth()]
+                                + " " + d.getFullYear() + " г.");
+</script>
+</tr>
+                <tr>
+                    <th>ночь</th>
+                    <th>утро</th>
+                    <th>день</th>
+                    <th>вечер</th>
+            </thead>
+                @if (ViewBag.Resul != null)
+                {
+            <tbody>
+                <tr>
+                    <td>температура</td>
+                    <td>@ViewBag.Resul[0].tempe</td>
+                    <td>@ViewBag.Resul[1].tempe</td>
+                    <td>@ViewBag.Resul[2].tempe</td>
+                    <td>@ViewBag.Resul[3].tempe</td>
+                </tr>
+                <tr>
+                    <td>давление</td>
+                    <td>@ViewBag.Resul[0].pres</td>
+                    <td>@ViewBag.Resul[1].pres</td>
+                    <td>@ViewBag.Resul[2].pres</td>
+                    <td>@ViewBag.Resul[3].pres</td>
+                </tr>
+                <tr>
+                    <td>влажность</td>
+                    <td>@ViewBag.Resul[0].humi</td>
+                    <td>@ViewBag.Resul[1].humi</td>
+                    <td>@ViewBag.Resul[2].humi</td>
+                    <td>@ViewBag.Resul[3].humi</td>
+                </tr>
+            </tbody>
+                }
+
+
+</table>
+    </div>
+
 </body>
-</html>
+    </html>

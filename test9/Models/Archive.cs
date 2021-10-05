@@ -140,6 +140,14 @@ namespace test9.Models
 
     public class Result
     {
+        public Result(double tempe, int humi, double pres, int srok)
+        {
+            this.tempe = tempe;
+            this.humi = humi;
+            this.pres = pres;
+            this.srok = srok;
+        }
+
         public int srok { get; set; }
         public double tempe { get; set; }
         public int humi { get; set; }
