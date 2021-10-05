@@ -22,12 +22,24 @@ namespace test9.Controllers
         [HttpPost]
         public ActionResult Index(string dayMonth)
         {
-            var userId = db.Users.Where(u => u.Login == User.Identity.Name).Select(u => u.Id).SingleOrDefault();
+
             // получаем из бд все объекты Extremum
             var extremum = db.Extrema.SingleOrDefault(e => e.Day_Month == dayMonth);
             // передаем все объекты в динамическое свойство Extremums в ViewBag
             ViewBag.Extremum = extremum;
             // возвращаем представление
+            User user = null;
+            using (WeatherContext db = new WeatherContext())
+            {
+                user = db.Users.FirstOrDefault(u => u.Login == User.Identity.Name);
+            }
+            if (user != null)
+            {
+                var userId = db.Users.Where(u => u.Login == User.Identity.Name).Select(u => u.Id).SingleOrDefault();
+                var extremumId = extremum.Id;
+                db.Requests.Add(new Request { UserId = userId, ForecastId = 0, ExtremumId = extremumId });
+                db.SaveChanges();
+            }
 
             return View();
         }

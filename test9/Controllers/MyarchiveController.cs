@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.Globalization;
+using System.Text;
 
 namespace test9.Controllers
 {
@@ -44,7 +45,7 @@ namespace test9.Controllers
             {
                 this.Year = Year;
                 int DateHour = DateTime.Now.Hour;
-               
+
                 HttpClient client = new HttpClient();
                 HttpResponseMessage response = await client.GetAsync("https://api.openweathermap.org/data/2.5/weather?q=%20Saint%20Petersburg,ru&appid=c986959d1fd2ecb4376e73e676671d28&units=metric");
                 var stringResult = await response.Content.ReadAsStringAsync();
@@ -58,7 +59,7 @@ namespace test9.Controllers
                 double pressure = Double.Parse(Pressure, CultureInfo.InvariantCulture);
                 //var archive = db.Archives.FirstOrDefault(e => e.Year == Year);
                 var archive = db.Archives.Where(t => (temp <= (t.Temperature * 1.05)) && (humidity <= (t.Humidity * 1.05)) && (pressure <= (t.Pressure * 1.05))).FirstOrDefault();
-               // ViewBag.Archive = archive;
+                // ViewBag.Archive = archive;
                 List<Archive> data = db.Archives.Where(t =>
                 (temp <= (t.Temperature * 1.05) && temp >= (t.Temperature * 0.95)
                 && (humidity <= (t.Humidity * 1.05) && humidity >= t.Humidity * 0.95)
@@ -91,7 +92,7 @@ namespace test9.Controllers
                         data2.Add(n);
                     }
                 }
-                
+
                 List<Result> res = new List<Result>();
                 int countTime0_3 = 0;//считает интервалы от 0 до 3 часов ночи
                 int countTime6_9 = 0;
@@ -181,7 +182,7 @@ namespace test9.Controllers
                     res.Add(result);
                 }
                 countTime0_3 = 0;
-                
+
                 if (countTime6_9 != 0)
                 {
                     tempe6_9 = tempe6_9 / countTime6_9;
@@ -216,6 +217,17 @@ namespace test9.Controllers
                 countTime18_21 = 0;
                 ViewBag.Resul = res;
                 // return View(archive);
+                StringBuilder resultToBase = new StringBuilder();
+                foreach (Result r in res)
+                {
+                    resultToBase.Append(r.tempe.ToString()+" ");
+                    resultToBase.Append(r.pres.ToString() + " ");
+                    resultToBase.Append(r.humi.ToString() + " ");
+                }
+                String forecastToBase = resultToBase.ToString();
+                //db.Forecasts.Add(new Forecast { Prediction = forecastToBase });
+                //db.SaveChanges();
+
                 return View(res);
             }
             else
