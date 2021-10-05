@@ -46,46 +46,70 @@
                             var month = new Array("января", "февраля", "марта", "апреля", "мая", "июня",
                                 "июля", "августа", "сентября", "октября", "ноября", "декабря");
 
-                            document.write(day[d.getDay()+1] + " " + d.getDate() + " " + month[d.getMonth()]
+                            document.write(day[d.getDay() + 1] + " " + (d.getDate() + 1) + " " + month[d.getMonth()]
                                 + " " + d.getFullYear() + " г.");
-</script>
-</tr>
+                        </script>
+                        <div>
+                            @if (ViewBag.Resul != null)
+                            {
+                                if (@ViewBag.Resul[2].humi < 70)
+                                {
+                                    <p>Днем ясно, без осадков</p>;
+                                }
+                                else if (70 <= @ViewBag.Resul[2].humi < 80)
+                                {
+                                    <p>Днем облачно, с прояснениями</p>;
+                                }
+                                else if (80 <= @ViewBag.Resul[2].humi < 90)
+                                {
+                                    <p>Днем пасмурно, в отдельных районах возможен кратковременный дождь</p>;
+                                }
+                                else 
+                                {
+                                    <p>Днем пасмурно, дождь</p>;
+                                }
+                            }
+
+
+                        </div>
+                        </th>
+                </tr>
                 <tr>
                     <th>ночь</th>
                     <th>утро</th>
                     <th>день</th>
                     <th>вечер</th>
             </thead>
-                @if (ViewBag.Resul != null)
-                {
-            <tbody>
-                <tr>
-                    <td>температура</td>
-                    <td>@ViewBag.Resul[0].tempe</td>
-                    <td>@ViewBag.Resul[1].tempe</td>
-                    <td>@ViewBag.Resul[2].tempe</td>
-                    <td>@ViewBag.Resul[3].tempe</td>
-                </tr>
-                <tr>
-                    <td>давление</td>
-                    <td>@ViewBag.Resul[0].pres</td>
-                    <td>@ViewBag.Resul[1].pres</td>
-                    <td>@ViewBag.Resul[2].pres</td>
-                    <td>@ViewBag.Resul[3].pres</td>
-                </tr>
-                <tr>
-                    <td>влажность</td>
-                    <td>@ViewBag.Resul[0].humi</td>
-                    <td>@ViewBag.Resul[1].humi</td>
-                    <td>@ViewBag.Resul[2].humi</td>
-                    <td>@ViewBag.Resul[3].humi</td>
-                </tr>
-            </tbody>
-                }
+            @if (ViewBag.Resul != null)
+            {
+                <tbody>
+                    <tr>
+                        <td>температура</td>
+                        <td>@ViewBag.Resul[0].tempe</td>
+                        <td>@ViewBag.Resul[1].tempe</td>
+                        <td>@ViewBag.Resul[2].tempe</td>
+                        <td>@ViewBag.Resul[3].tempe</td>
+                    </tr>
+                    <tr>
+                        <td>давление</td>
+                        <td>@ViewBag.Resul[0].pres</td>
+                        <td>@ViewBag.Resul[1].pres</td>
+                        <td>@ViewBag.Resul[2].pres</td>
+                        <td>@ViewBag.Resul[3].pres</td>
+                    </tr>
+                    <tr>
+                        <td>влажность</td>
+                        <td>@ViewBag.Resul[0].humi</td>
+                        <td>@ViewBag.Resul[1].humi</td>
+                        <td>@ViewBag.Resul[2].humi</td>
+                        <td>@ViewBag.Resul[3].humi</td>
+                    </tr>
+                </tbody>
+            }
 
 
-</table>
+        </table>
     </div>
 
 </body>
-    </html>
+</html>

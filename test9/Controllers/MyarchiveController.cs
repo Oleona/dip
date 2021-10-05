@@ -21,6 +21,9 @@ namespace test9.Controllers
         int humi0_3, humi6_9, humi12_15, humi18_21;
         double pres0_3, pres6_9, pres12_15, pres18_21;
         int srok;
+        const double k1= 1.05;//  верхний коэффициент для границ выборки из базы. Подобран опытным путем
+        const double k2 = 0.95; // нижний
+
         // GET: Myarchive
 
         public ActionResult Index()
@@ -56,53 +59,48 @@ namespace test9.Controllers
                 //без CultureInfo была ошибка из за преобразования разделителя в виде запятой
                 double temp = Double.Parse(rawWeather.Main.Temp, CultureInfo.InvariantCulture);
                 double pressure = Double.Parse(rawWeather.Main.Pressure, CultureInfo.InvariantCulture);
-
-                var archive = db.Archives
-                    .Where(t => temp <= t.Temperature * 1.05)
-                    .Where(t => humidity <= t.Humidity * 1.05)
-                    .Where(t => pressure <= t.Pressure * 1.05)
-                    .FirstOrDefault();
-
+              
+                // выбираем из базы значения температуры, влажности, давления, отличающиеся от погоды на данный момент на 
+                // подобранный коэффициент с учетом времени ( не более часа в обе стороны разброс).
                 var data = db.Archives
-                    .Where(t => temp <= t.Temperature * 1.05 && temp >= t.Temperature * 0.95)
-                    .Where(t => humidity <= t.Humidity * 1.05 && humidity >= t.Humidity * 0.95)
-                    .Where(t => pressure <= t.Pressure * 1.05 && pressure >= t.Pressure * 0.95)
+                    .Where(t => temp <= t.Temperature * k1 && temp >= t.Temperature * k2)
+                    .Where(t => humidity <= t.Humidity * k1 && humidity >= t.Humidity * k2)
+                    .Where(t => pressure <= t.Pressure * k1 && pressure >= t.Pressure * k2)
                     .Where(t => DateHour <= t.Time + 1 && DateHour >= t.Time - 1)
                     .ToList();
 
                 //датаселект- хранит даты данных из data поэтому он в 3 раза длиннее- для каждого значения из data идет день месяц год
-                List<int> dataSelect = new List<int>();
+                // день сразу увеличиваем на 1 так как прогноз будет строиться по датам, следующим за имеющейся
+                List<int> dayMonthYear = new List<int>();
                 foreach (Archive b in data)
-
                 {
-                    dataSelect.Add((int)b.Day + 1);
-                    dataSelect.Add((int)b.Month);
-                    dataSelect.Add((int)b.Year);
+                    dayMonthYear.Add((int)b.Day + 1);
+                    dayMonthYear.Add((int)b.Month);
+                    dayMonthYear.Add((int)b.Year);
                 }
-                List<Archive> data1 = new List<Archive>();
-                List<Archive> data2 = new List<Archive>();
-                for (int i = 0; i < dataSelect.Count; i += 3)
+                List<Archive> OneDayForPrediction = new List<Archive>();
+                List<Archive> forecast = new List<Archive>();
+                for (int i = 0; i < dayMonthYear.Count; i += 3)
                 {
-                    var myDay = dataSelect[i];
-                    var myMonth = dataSelect[i + 1];
-                    var myYear = dataSelect[i + 2];
-                    var prognozList = db.Archives.Where(v => v.Day == myDay && v.Month == myMonth && v.Year == myYear);
-                    //data1 каждый раз содержит 8 значений- на дату по срокам
-                    data1 = prognozList.ToList();
-                    foreach (Archive n in data1)
+                    var myDay = dayMonthYear[i];
+                    var myMonth = dayMonthYear[i + 1];
+                    var myYear = dayMonthYear[i + 2];
+                    //OneDayForPrediction каждый раз содержит 8 значений- на одну дату по срокам 0-3-6-9-12-15-18-21 час
+                    OneDayForPrediction = db.Archives.Where(v => v.Day == myDay && v.Month == myMonth && v.Year == myYear).ToList();             
+                    foreach (Archive n in OneDayForPrediction)
                     {
-                        //data2 содержит все данные подходящих прогнозов на след день со сроками чуть меньше чем 8*data.count т.к пренебрегла переходом на след.месяц
+                        //forecast содержит все данные подходящих прогнозов на след день со сроками, чуть меньше чем 8*data.count т.к пренебрегла переходом на след.месяц
                         // для граничных дней типа 30 сент-31 сент не существует
-                        data2.Add(n);
+                        forecast.Add(n);
                     }
                 }
 
                 List<Result> res = new List<Result>();
-                int countTime0_3 = 0;//считает интервалы от 0 до 3 часов ночи
+                int countTime0_3 = 0;//считает данные для прогоза на ночь- на 0 и 3 часа ночи
                 int countTime6_9 = 0;
                 int countTime12_15 = 0;
                 int countTime18_21 = 0;
-                foreach (Archive p in data2)
+                foreach (Archive p in forecast)
                 {
                     if (p.Time.HasValue)
                     {
@@ -178,9 +176,12 @@ namespace test9.Controllers
                 }
                 if (countTime0_3 != 0)
                 {
+                   
                     tempe0_3 = tempe0_3 / countTime0_3;
-                    humi0_3 = humi0_3 / countTime0_3;
+                    tempe0_3 = Math.Round(tempe0_3, 2);
+                    humi0_3 = humi0_3 / countTime0_3;                  
                     pres0_3 = pres0_3 / countTime0_3;
+                    pres0_3 = Math.Round(pres0_3, 2);
                     srok = 0;
                     Result result = new Result(tempe0_3, humi0_3, pres0_3, srok);
                     res.Add(result);
@@ -190,8 +191,10 @@ namespace test9.Controllers
                 if (countTime6_9 != 0)
                 {
                     tempe6_9 = tempe6_9 / countTime6_9;
+                    tempe6_9 = Math.Round(tempe6_9, 2);
                     humi6_9 = humi6_9 / countTime6_9;
                     pres6_9 = pres6_9 / countTime6_9;
+                    pres6_9 = Math.Round(pres6_9, 2);
                     srok = 6;
                     Result result = new Result(tempe6_9, humi6_9, pres6_9, srok);
                     res.Add(result);
@@ -201,8 +204,10 @@ namespace test9.Controllers
                 if (countTime12_15 != 0)
                 {
                     tempe12_15 = tempe12_15 / countTime12_15;
+                    tempe12_15 = Math.Round(tempe12_15, 2);
                     humi12_15 = humi12_15 / countTime12_15;
                     pres12_15 = pres12_15 / countTime12_15;
+                    pres12_15 = Math.Round(pres12_15, 2);
                     srok = 12;
                     Result result = new Result(tempe12_15, humi12_15, pres12_15, srok);
                     res.Add(result);
@@ -212,15 +217,18 @@ namespace test9.Controllers
                 if (countTime18_21 != 0)
                 {
                     tempe18_21 = tempe18_21 / countTime18_21;
+                    tempe18_21 = Math.Round(tempe18_21, 2);
                     humi18_21 = humi18_21 / countTime18_21;
                     pres18_21 = pres18_21 / countTime18_21;
+                    pres18_21 = Math.Round(pres18_21, 2);
                     srok = 18;
                     Result result = new Result(tempe18_21, humi18_21, pres18_21, srok);
                     res.Add(result);
                 }
                 countTime18_21 = 0;
                 ViewBag.Resul = res;
-                // return View(archive);
+                
+                // готовим строку для записи результата прогноза в базу
                 StringBuilder resultToBase = new StringBuilder();
                 foreach (Result r in res)
                 {

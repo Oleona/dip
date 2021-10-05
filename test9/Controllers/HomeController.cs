@@ -20,7 +20,7 @@ namespace test9.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public ActionResult Index(string dayMonth)
+        public  ActionResult Index(string dayMonth)
         {
             if (string.IsNullOrEmpty(dayMonth))
             {
