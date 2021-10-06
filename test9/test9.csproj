@@ -172,6 +172,8 @@
     <Content Include="Content\image\tahiti.jpg" />
     <Content Include="Content\image\vesna.jpg" />
     <Content Include="Content\image\zima.jpg" />
+    <Content Include="Content\Login.css" />
+    <Content Include="Content\Logout.css" />
     <Content Include="Content\Video\rainl.mp4" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -208,6 +210,11 @@
     <Content Include="Views\Myarchive\Index.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\Winter.cshtml" />
+    <Content Include="Views\Home\Summer.cshtml" />
+    <Content Include="Views\Spring.cshtml" />
+    <Content Include="Views\Home\Spring.cshtml" />
+    <Content Include="Views\Home\Authumn.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202108281515097_InitialCreate.resx">

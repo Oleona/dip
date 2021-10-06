@@ -19,14 +19,10 @@
     <meta name="author" content="© Ольга">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О погоде в Петербурге</title>
-
-
-
 </head>
 
 <body>
-    <div class="logout">
-        
+    <div class="logout">     
             @if (User.Identity.IsAuthenticated)
             {
                 <a href="/Home/Logoff">logout...</a>
@@ -34,10 +30,9 @@
             else
             {
                 <a href="/Home/Login">login</a>
-                <label for=""> | </label>
+                <a for=""> | </a>
                 <a href="/Home/Register">register</a>
-            }
-        
+            }       
     </div>
 
     <p>  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;                         </p>

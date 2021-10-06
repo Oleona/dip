@@ -10,6 +10,25 @@ namespace test9.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult Summer()
+        {
+            return View();
+        }
+
+        public ActionResult Winter()
+        {
+            return View();
+        }
+
+        public ActionResult Authumn()
+        {
+            return View();
+        }
+
+        public ActionResult Spring()
+        {
+            return View();
+        }
         WeatherContext db = new WeatherContext();
         [AllowAnonymous]
         [HttpGet]
