@@ -7,6 +7,8 @@
 <head>
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/Site.css")
+    <link href="@Url.Content("~/Content/Logout.css")" rel="stylesheet" type="text/css" />
+    @Styles.Render("~/Content/Logout.css")
 
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/Scripts/JavaScriptweather.js")
@@ -18,21 +20,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>О погоде в Петербурге</title>
 
+
+
 </head>
 
 <body>
-    <div>
-        @if (User.Identity.IsAuthenticated)
-        {
-            @Html.ActionLink("logout...", "Logoff")
-        }
-        else
-        {
-            @Html.ActionLink("login", "Login")
-            @Html.Label(" | ");
-            @Html.ActionLink("register", "Register")
-        }
+    <div class="logout">
+        
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="/Home/Logoff">logout...</a>
+            }
+            else
+            {
+                <a href="/Home/Login">login</a>
+                <label for=""> | </label>
+                <a href="/Home/Register">register</a>
+            }
+        
     </div>
+
+    <p>  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;                         </p>
+    <p>  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;                         </p>
+
     <div id="context">
         <ul class="context-menu">
 
@@ -298,11 +308,11 @@
 
         <form id="Form3" action="/Myarchive/Index" method="post">
             <!--<p> введите год прогноза</p>!
-    <p><input type="number" name="1970" /></p>-->
+            <p><input type="number" name="1970" /></p>-->
 
             <div class="inter">
                 <p>
-                    <input type="submit" class="send" id="SendButton" value="ПОСМОТРЕТЬ ПРОГНОЗ" name="Year"/>
+                    <input type="submit" class="send" id="SendButton" value="ПОСМОТРЕТЬ ПРОГНОЗ" name="Year" />
                 </p>
             </div>
         </form>
@@ -310,12 +320,12 @@
 
 
 
-        </main>
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @Scripts.Render("~/Scripts/JavaScriptweather.js")
-        @Scripts.Render("~/Scripts/JavaScriptweather2.js")
-    </body>
+    </main>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/Scripts/JavaScriptweather.js")
+    @Scripts.Render("~/Scripts/JavaScriptweather2.js")
+</body>
 
     </html>
     <!--<script charset="utf-8" src="./js/jquery-3.6.0.js"></script>!-->

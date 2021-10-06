@@ -11,9 +11,9 @@ body {
     
 }
 
+
 #p {
     font: size 1.5em;
-    
     font-weight: 400;
 }
 
@@ -137,7 +137,7 @@ table:hover {
 }
 
 .primetav, .primetao, .primetal, .primetaz {
-    font-family: 'Rubik', sans-serif;
+    font-family: 'Pacifico';
     font-weight: bold;
 }
 
@@ -420,4 +420,3 @@ button:focus {
                 display: block;
             }
 
-       
