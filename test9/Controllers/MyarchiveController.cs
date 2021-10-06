@@ -16,12 +16,11 @@ namespace test9.Controllers
     public class MyarchiveController : Controller
     {
         WeatherContext db = new WeatherContext();
-        private String Year;
         double tempe0_3, tempe6_9, tempe12_15, tempe18_21;
         int humi0_3, humi6_9, humi12_15, humi18_21;
         double pres0_3, pres6_9, pres12_15, pres18_21;
         int srok;
-        const double k1= 1.05;//  верхний коэффициент для границ выборки из базы. Подобран опытным путем
+        const double k1 = 1.05;//  верхний коэффициент для границ выборки из базы. Подобран опытным путем
         const double k2 = 0.95; // нижний
 
         // GET: Myarchive
@@ -35,18 +34,14 @@ namespace test9.Controllers
             else
             {
                 return RedirectToAction("Login", "Home");
-                //ViewBag.Archive = null;
-
             }
         }
 
         [HttpPost]
-        public async Task<ActionResult> Index(String Year)
+        public async Task<ActionResult> Index(String buttonName)
         {
-
             if (User.Identity.IsAuthenticated)
             {
-                this.Year = Year;
                 int DateHour = DateTime.Now.Hour;
 
                 HttpClient client = new HttpClient();
@@ -59,14 +54,15 @@ namespace test9.Controllers
                 //без CultureInfo была ошибка из за преобразования разделителя в виде запятой
                 double temp = Double.Parse(rawWeather.Main.Temp, CultureInfo.InvariantCulture);
                 double pressure = Double.Parse(rawWeather.Main.Pressure, CultureInfo.InvariantCulture);
-              
+
                 // выбираем из базы значения температуры, влажности, давления, отличающиеся от погоды на данный момент на 
                 // подобранный коэффициент с учетом времени ( не более часа в обе стороны разброс).
                 var data = db.Archives
                     .Where(t => temp <= t.Temperature * k1 && temp >= t.Temperature * k2)
                     .Where(t => humidity <= t.Humidity * k1 && humidity >= t.Humidity * k2)
                     .Where(t => pressure <= t.Pressure * k1 && pressure >= t.Pressure * k2)
-                    .Where(t => DateHour <= t.Time + 1 && DateHour >= t.Time - 1)
+                    .Where(t => t.Time >= DateHour - 1 && t.Time <= DateHour + 1 ||
+                                DateHour + 1 == 24 && t.Time == 0)
                     .ToList();
 
                 //датаселект- хранит даты данных из data поэтому он в 3 раза длиннее- для каждого значения из data идет день месяц год
@@ -86,7 +82,7 @@ namespace test9.Controllers
                     var myMonth = dayMonthYear[i + 1];
                     var myYear = dayMonthYear[i + 2];
                     //OneDayForPrediction каждый раз содержит 8 значений- на одну дату по срокам 0-3-6-9-12-15-18-21 час
-                    OneDayForPrediction = db.Archives.Where(v => v.Day == myDay && v.Month == myMonth && v.Year == myYear).ToList();             
+                    OneDayForPrediction = db.Archives.Where(v => v.Day == myDay && v.Month == myMonth && v.Year == myYear).ToList();
                     foreach (Archive n in OneDayForPrediction)
                     {
                         //forecast содержит все данные подходящих прогнозов на след день со сроками, чуть меньше чем 8*data.count т.к пренебрегла переходом на след.месяц
@@ -176,10 +172,10 @@ namespace test9.Controllers
                 }
                 if (countTime0_3 != 0)
                 {
-                   
+
                     tempe0_3 = tempe0_3 / countTime0_3;
                     tempe0_3 = Math.Round(tempe0_3, 2);
-                    humi0_3 = humi0_3 / countTime0_3;                  
+                    humi0_3 = humi0_3 / countTime0_3;
                     pres0_3 = pres0_3 / countTime0_3;
                     pres0_3 = Math.Round(pres0_3, 2);
                     srok = 0;
@@ -227,7 +223,7 @@ namespace test9.Controllers
                 }
                 countTime18_21 = 0;
                 ViewBag.Resul = res;
-                
+
                 // готовим строку для записи результата прогноза в базу
                 StringBuilder resultToBase = new StringBuilder();
                 foreach (Result r in res)
@@ -249,7 +245,7 @@ namespace test9.Controllers
 
                 request.ForecastId = newForecast.Id;
                 await db.SaveChangesAsync();
-                
+
 
                 return View(res);
             }

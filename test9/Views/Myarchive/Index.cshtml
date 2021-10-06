@@ -7,72 +7,72 @@
 
 <html>
 <head>
+    
+        <link href="@Url.Content("~/Content/Forecast.css")" rel="stylesheet" type="text/css" />
+        @Styles.Render("~/Content/Forecast.css")
+
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/Scripts/JavaScriptweather.js")
+
+        <meta charset="utf-8">
+    
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
+    
 </head>
-<body>
+<body background="~/Content/image/pictogramma.png" background-repeat="no-repeat" >
+    
 
-    <!--  <div class="season">
-                <table id="three">
-                    @if (ViewBag.Archive != null)
-                    {
 
-                    <tr>
-                        <td><p>температура</p><p>@ViewBag.Archive.Temperature</p></td>
-                        <td><p>влажность</p><p>@ViewBag.Archive.Humidity</p></td>
-                        <td><p>давление</p><p>@ViewBag.Archive.Pressure</p></td>
-                        <td><p>год</p><p>@ViewBag.Archive.Year</p></td>
-                        <td><p>месяц</p><p>@ViewBag.Archive.Month</p></td>
-                        <td><p>день</p><p>@ViewBag.Archive.Day</p></td>
-                    </tr>
-                    }
-                </table>
-            </div>-->
-
-    <div class="season">
+    <div class="forecast">
         <table id="three">
             <thead>
                 <tr>
                     <td rowspan="3"></td>
                     <th colspan="4">
-                        Прогноз погоды на
-                        <script language="javascript" type="text/javascript">
-<!--
-                            var d = new Date();
+                        <h2>
+                            Прогноз погоды на
+                            <script language="javascript" type="text/javascript">
 
-                            var day = new Array("Воскресенье", "Понедельник", "Вторник",
-                                "Среда", "Четверг", "Пятница", "Суббота");
+                                var d = new Date();
 
-                            var month = new Array("января", "февраля", "марта", "апреля", "мая", "июня",
-                                "июля", "августа", "сентября", "октября", "ноября", "декабря");
+                                var day = new Array("Воскресенье", "Понедельник", "Вторник",
+                                    "Среда", "Четверг", "Пятница", "Суббота");
 
-                            document.write(day[d.getDay() + 1] + " " + (d.getDate() + 1) + " " + month[d.getMonth()]
-                                + " " + d.getFullYear() + " г.");
-                        </script>
+                                var month = new Array("января", "февраля", "марта", "апреля", "мая", "июня",
+                                    "июля", "августа", "сентября", "октября", "ноября", "декабря");
+
+                                document.write(day[d.getDay() + 1] + " " + (d.getDate() + 1) + " " + month[d.getMonth()]
+                                    + " " + d.getFullYear() + " г.");
+                            </script>
+                        </h2>
                         <div>
-                            @if (ViewBag.Resul != null)
-                            {
-                                if (@ViewBag.Resul[2].humi < 70)
-                                {
-                                    <p>Днем ясно, без осадков</p>;
-                                }
-                                else if (70 <= @ViewBag.Resul[2].humi < 80)
-                                {
-                                    <p>Днем облачно, с прояснениями</p>;
-                                }
-                                else if (80 <= @ViewBag.Resul[2].humi < 90)
-                                {
-                                    <p>Днем пасмурно, в отдельных районах возможен кратковременный дождь</p>;
-                                }
-                                else 
-                                {
-                                    <p>Днем пасмурно, дождь</p>;
-                                }
-                            }
+                            <h3>
 
+                                @if (ViewBag.Resul != null)
+                                {
+                                    if (@ViewBag.Resul[2].humi < 70)
+                                    {
+                                        <p>Днем ясно, без осадков</p>;
+                                    }
+                                    else if (70 <= @ViewBag.Resul[2].humi < 80)
+                                    {
+                                        <p>Днем облачно, с прояснениями</p>;
+                                    }
+                                    else if (80 <= @ViewBag.Resul[2].humi < 90)
+                                    {
+                                        <p>Днем пасмурно, в отдельных районах возможен кратковременный дождь</p>;
+                                    }
+                                    else
+                                    {
+                                        <p>Днем пасмурно, дождь</p>;
+                                    }
+                                }
 
+                            </h3>
                         </div>
-                        </th>
+
+                    </th>
                 </tr>
                 <tr>
                     <th>ночь</th>

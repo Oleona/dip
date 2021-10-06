@@ -162,12 +162,15 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Forecast.css" />
+    <Content Include="Content\image\diplom.png" />
     <Content Include="Content\image\indonez.jpg" />
     <Content Include="Content\image\jamaika.jpg" />
     <Content Include="Content\image\leto.jpg" />
     <Content Include="Content\image\main.jpg" />
     <Content Include="Content\image\mald.jpg" />
     <Content Include="Content\image\osen.jpg" />
+    <Content Include="Content\image\pictogramma.png" />
     <Content Include="Content\image\rain.jpg" />
     <Content Include="Content\image\tahiti.jpg" />
     <Content Include="Content\image\vesna.jpg" />

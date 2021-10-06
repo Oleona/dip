@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -39,7 +40,7 @@ namespace test9.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public  ActionResult Index(string dayMonth)
+        public async Task<ActionResult> Index(string dayMonth)
         {
             if (string.IsNullOrEmpty(dayMonth))
             {
@@ -61,7 +62,8 @@ namespace test9.Controllers
                 var userId = db.Users.Where(u => u.Login == User.Identity.Name).Select(u => u.Id).SingleOrDefault();
                 var extremumId = extremum.Id;
                 db.Requests.Add(new Request { UserId = userId, ForecastId = 0, ExtremumId = extremumId });
-                db.SaveChanges();
+
+                await db.SaveChangesAsync();
             }
 
             return View();
