@@ -2,10 +2,11 @@
     text-align: left;
     font-weight: bold;
     position: relative;
-    top: 400px;
-    margin: 50px auto 0 auto;
-    padding: 20px 20px 5px;
-    width: 750px;
+    top: 450px;
+    left:-10px;
+    margin: 20px auto 0 auto;
+    padding: 10px 10px 5px;
+    width: 650px;
     background: #f3f3f4;
     border-radius: 3px;
     -webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -49,13 +50,24 @@ p {
     display: block;
     margin: 0 auto;
     max-width: 80vw;
-
+    
 }
-body {
+#image {
     background-repeat: no-repeat;
-    background-size: 1100px, 1200px;
     background-position: top;
+    animation: moving 30s infinite linear;
+    position: absolute;
+    left: 220px;
+}
+@keyframes moving {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
 
+#container {
+    
+    position: relative;
 }
 
 
