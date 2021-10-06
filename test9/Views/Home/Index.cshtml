@@ -22,17 +22,20 @@
 </head>
 
 <body>
-    <div class="logout">     
-            @if (User.Identity.IsAuthenticated)
-            {
-                <a href="/Home/Logoff">logout...</a>
-            }
-            else
-            {
-                <a href="/Home/Login">login</a>
-                <a for=""> | </a>
-                <a href="/Home/Register">register</a>
-            }       
+    <div class="logout">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a href="/Home/Logoff">logout   </a>
+
+            <a for=""> |  @User.Identity.Name </a>
+            
+        }
+        else
+        {
+            <a href="/Home/Login">login</a>
+            <a for=""> | </a>
+            <a href="/Home/Register">register</a>
+        }
     </div>
 
     <p>  &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;                         </p>
