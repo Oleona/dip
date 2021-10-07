@@ -3,14 +3,27 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Rubik:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
+html {
+    overflow-x: hidden;
+}
+
+
 body {
+    /* font-family: Arial, Helvetica, sans-serif;
     font-family: 'Rubik', sans-serif;
     font-weight: 400;
     margin: 15px;
+    background-color: rgb(231, 233, 235);*/
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
     background-color: rgb(231, 233, 235);
-    
+    color: #333;
 }
 
+header {
+    height:200px;
+}
 
 #p {
     font: size 1.5em;
@@ -18,11 +31,18 @@ body {
 }
 
 .center-img {
+    
     display: block;
     margin: 0 auto;
     max-width: 100vw;
-}
+    
 
+}
+.center-img-main {
+    position: absolute;
+    left: 30px;
+    
+}
 h1 {
     text-align: center;
     font-family: 'Pacifico', sans-serif;
@@ -34,6 +54,21 @@ h2 {
     font-family: 'Pacifico', sans-serif;
     font-weight: 400;
     margin: 0 auto;
+}
+
+h5 {
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    font-size: 0.93em;
+    margin-block-start: 1.67em;
+    margin-block-end: 1.67em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+hr {
+    margin:20px;
 }
 
 .align-right {
@@ -69,22 +104,33 @@ h2 {
 
 
 .top {
+    /* vertical-align: top;
+    display: inline-block;
+    padding: 5px;
+    margin: auto;*/
+    text-align: center;
+    /*width: 100% !important;
+    margin-left: -650px;*/
+}
+
+.topp {
     vertical-align: top;
     display: inline-block;
     padding: 5px;
-    margin: auto;
+    margin: 0;
     text-align: right;
     width: 100% !important;
-    margin-left: -50px;
+    margin-left: -650px;
 }
 
-    .top cite {
-        font-family: 'Pacifico', sans-serif;
-        font-size: 15px;
-        padding-top: 10px;
-        display: block;
-        text-align: right;
-    }
+
+.top cite {
+    font-family: 'Pacifico', sans-serif;
+    font-size: 15px;
+    padding-top: 10px;
+    display: block;
+    text-align: right;
+}
 
 #table-wright {
     font-family: 'Rubik', sans-serif;
@@ -111,6 +157,10 @@ a {
     width: 25%;
     text-decoration: none;
     text-align: top;
+}
+
+p{
+    margin:10px;
 }
 
     a:active, a:hover {
@@ -213,13 +263,11 @@ table:hover {
 .send {
     width: 70%;
     max-width: 350px;
-    max-height: 50px;
+    font-weight: bold;
     margin: 1em auto;
     padding: 3em;
-    background: rgb(195, 250, 250);
     box-shadow: 0 0 2em 2em rgb(231, 233, 235) inset;
-    
-    color: blue;
+    color: black;
 }
 
 .inter {
@@ -228,22 +276,37 @@ table:hover {
     text-align: center;
 }
 
+
 #dayMonth {
     text-align: center;
     display: block;
-    width: 70%;
-    max-width: 250px;
     margin: 1em auto;
     padding: 1em;
-    background: rgb(195, 250, 250);
-    box-shadow: 0 0 1em 1em rgb(231, 233, 235) inset;
+    width: 70%;
+    max-width: 250px;
+    background-color: #dee0e5;
+    border-radius: 1px;
+    -webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
     font-family: 'Rubik', sans-serif;
-    color: blue;
+}
+#ex {
+    text-align: center;
+    display: block;
+    margin: 1em auto;
+    padding: 1em;
+    width: 70%;
+    max-width: 250px;
+    background-color: #dee0e5;
+    border-radius: 1px;
+    -webkit-box-shadow: 0 0 200px rgba(255, 255, 255, 0.5), 0 1px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    font-family: 'Rubik', sans-serif;
 }
 
 .interline {
     line-height: 1.5;
-    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #dalee {
@@ -293,6 +356,8 @@ table:hover {
     max-width: 320px;
     align-items: center;
     justify-content: center;
+    /*position: absolute;
+    right: 115px; /* Положение от правого края */
 }
 
 
@@ -420,3 +485,29 @@ button:focus {
                 display: block;
             }
 
+#containerh {
+    width: 1600px; /* Ширина макета */
+    margin: 0 auto; /* Выравниваем по центру */
+    
+}
+
+#nav, #aside {
+    float: left;
+    width: 400px;
+    padding: 5px;
+}
+
+
+
+#content {
+    margin: 0 400px ; /* Отступ на ширину левой и правой колонки*/
+    padding: 10px;
+}
+#aside {
+    float: right;
+    margin-right: 20px;
+}
+.mirrorX {
+    
+    transform: scale(-1, 1);
+}

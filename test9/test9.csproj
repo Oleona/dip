@@ -171,6 +171,7 @@
     <Content Include="Content\image\mald.jpg" />
     <Content Include="Content\image\osen.jpg" />
     <Content Include="Content\image\pictogramma.png" />
+    <Content Include="Content\image\prognozRain.png" />
     <Content Include="Content\image\rain.jpg" />
     <Content Include="Content\image\tahiti.jpg" />
     <Content Include="Content\image\vesna.jpg" />

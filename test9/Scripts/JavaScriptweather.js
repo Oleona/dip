@@ -2,9 +2,9 @@
 
 
 
-    $(document).on("contextmenu", function () {
-        return false;
-    });
+   // $(document).on("contextmenu", function () {
+     //   return false;
+  //  });
 
 
 
