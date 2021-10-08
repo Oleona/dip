@@ -178,6 +178,20 @@ a {
     text-align: top;
 }
 
+#a {
+    float: none;
+    width: 25%;
+    text-decoration: none;
+    text-align: top;
+}
+
+#aa {
+    float: none;
+    width: 25%;
+    text-decoration: none;
+    text-align: top;
+}
+
 p{
     margin:10px;
 }
@@ -245,7 +259,10 @@ table:hover {
             background: #efefef;
             box-shadow: inset 3px 3px 10px #667575;
             padding: 10px;
+            content: 'СКРЫТЬ';
         }
+
+
 
 .primetav::before {
     content: "♥";
@@ -333,6 +350,30 @@ table:hover {
 }
 
 #skrit {
+    border: none;
+}
+
+#dalees {
+    border: none;
+}
+
+#skrits {
+    border: none;
+}
+
+#daleesu {
+    border: none;
+}
+
+#skritsu {
+    border: none;
+}
+
+#daleew {
+    border: none;
+}
+
+#skritw {
     border: none;
 }
 
@@ -523,7 +564,7 @@ button:focus {
     padding: 10px;
 }
 #aside {
-    float: right;
+      float: right;
     margin-right: 20px;
 }
 .mirrorX {
@@ -531,5 +572,63 @@ button:focus {
     transform: scale(-1, 1);
 }
 
+#containerhSpring {
+    width: 1600px; /* Ширина макета */
+    margin: 0 auto; /* Выравниваем по центру */
+}
 
-    
+#navSpring, #asideSpring {
+    float: left;
+    width: 620px;
+    padding: 5px;
+}
+
+
+
+#contentSpring {
+     /*margin: 0 100px; Отступ на ширину левой и правой колонки*/
+    padding: 10px;
+}
+
+#asideSpring {
+/*float: right; Выравниваем  */
+   
+    margin-right: 20px;
+    width: 620px;
+}
+
+#headerSpring {
+    height: 260px;
+}
+
+
+#containerhAuthumn, #containerhWinter, #containerhSummer {
+    width: 1600px; /* Ширина макета */
+    margin: 0 auto; /* Выравниваем по центру */
+}
+
+#navAuthumn, #asideAuthumn, #navWinter, #asideWinter, #navSummer, #asideSummer {
+    float: left;
+    width: 620px;
+    padding: 5px;
+}
+
+
+
+#contentAuthumn, #contentWinter, #contentSummer {
+    /*margin: 0 100px; Отступ на ширину левой и правой колонки*/
+    padding: 10px;
+}
+
+#asideAuthumn, #asideWinter, #asideSummer {
+    /*float: right; Выравниваем  */
+    margin-right: 20px;
+    width: 620px;
+}
+
+#headerAuthumn, #headerWinter, #headerSummer {
+    height: 260px;
+}
+#asideWinter {
+    float:right
+}

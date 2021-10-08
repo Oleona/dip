@@ -10,7 +10,7 @@
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/Site.css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/Scripts/JavaScriptweather.js")
+    @Scripts.Render("~/Scripts/JavaScriptspring.js")
 
     <meta charset="utf-8">
     <meta name="description" content="ВЕСНА">
@@ -24,43 +24,110 @@
 </head>
 
 <body>
-    <div id="context">
-        <ul class="context-menu">
 
-            <li><a href="#" class="hidden"> Назад</a></li>
-            <li><a href="#" class="hidden">Вперед</a></li>
-            <li><a href="#" class="hidden">Перезагрузить</a></li>
-            <li><a href="#" class="hidden">Сохранить как...</a></li>
-            <li><a href="#" class="hiddenimg">Изображение защищено авторским правом и его нельзя скачать</a></li>
+    <header id="headerSpring">
 
-        </ul>
-    </div>
-    <header>
-        <img height="100%" src="@Url.Content("~/Content/image/vesna.jpg")" class="center-img">
-
+        <div id="containerhSpring">
+            <div id="navSpring"><img height="250" src="@Url.Content("~/Content/image/vesna.jpg")" class="center-img">   </div>
+            <div id="asideSpring">
+                <blockquote class="top">
+                    <br>
+                    <br>
+                    <br>
+                    <h2>
+                        "С мартовской тучи летят паруса <br>
+                        Наоткось, мокрыми хлопьями в слякоть..."
+                    </h2>
+                    <cite> Борис Пастернак, 1915</cite>
+                </blockquote>
+            </div>
+            <div id="contentSpring">
+            </div>
+        </div>
     </header>
+
+
     <main>
-
-        <blockquote class="top">
-            <h2>
-                "С мартовской тучи летят паруса <br>
-                Наоткось, мокрыми хлопьями в слякоть..."
-            </h2>
-
-            <cite> Борис Пастернак, 1915</cite>
-        </blockquote>
-
         <br><br>
-        <article class="interline">
-            Самый минимум календарной весны в Санкт-Петербурге был зафиксирован 22 марта 1883 года: −29,9 °C. Максимум -
-            19 мая 2014 года: +33 °C.<br>
-            Максимальный рекорд марта был зафиксирован 17 марта 2015 года: +15.3 °C. Минимальный рекорд мая −6,6 °C был
-            установлен 3 мая 1885 года.<br>
-            Самая засушливая погода была весной 2006 года. Осадков не было почти месяц — с 22 апреля по 18 мая
+        <article class="wrapper" style="width: 1530px;  text-align:center;background-color:whitesmoke;vertical-align: middle; border-radius: 3px;padding :10px ;box-shadow: 0 0 20px rgba(0,0,0,0.2); ">
+            <article class="interline">
+                <p>
+                    Самый минимум календарной весны в Санкт-Петербурге был зафиксирован 22 марта 1883 года: −29,9 °C. Максимум -
+                    19 мая 2014 года: +33 °C.
+                    <br>
+                    Максимальный рекорд марта был зафиксирован 17 марта 2015 года: +15.3 °C. Минимальный рекорд мая −6,6 °C был
+                    установлен 3 мая 1885 года.
+                    <br>
+                    Самая засушливая погода была весной 2006 года. Осадков не было почти месяц — с 22 апреля по 18 мая. <br>
+                </p>
+            </article>
+        </article>
+        
+        
 
-        </article><br>
+        <section>
+            <article class="wrapper" style="width: 1550px; border-radius: 3px;box-shadow: 0 0 20px rgba(0,0,0,0.2); ">
 
-        <article class="seasons">
+                <article style="float: left; width: 470px;height:130px;background-color:whitesmoke;padding: 0px 10px 5px;border-radius: 3px;vertical-align: middle;text-align:center;
+margin:20px 20px 20px 0px;box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+                    <article class="seasonss">
+                        <h3 class="dec"> Март </h3>
+                        <p class="interline">
+                            Самый теплый март 3.6°C (2007)<br>
+
+                            Самый холодный март -11.5°C (1942)<br>
+
+                            Самый влажный март 83 мм (1971)<br>
+
+                            Самый сухой март 1 мм (1923)<br>
+                        </p>
+                    </article>
+                </article>
+
+                <article style="float: left; width: 470px;height:130px;background-color:whitesmoke;padding: 0px 10px 5px;border-radius: 3px;vertical-align: middle;text-align:center;
+    margin:20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+                    <article class="seasonss">
+                        <h3 class="dec"> Апрель </h3>
+                        <p class="interline">
+                            Самый теплый апрель 8.3°C (1921)<br>
+
+                            Самый холодный апрель -3.8°C (1790)<br>
+
+                            Самый влажный апрель 99 мм (1764)<br>
+
+                            Самый сухой апрель 2 мм (1850)
+                        </p><br>
+                        </p>
+                    </article>
+                </article>
+
+                <article style="float: left; width: 470px;height:130px;background-color:whitesmoke;padding: 0px 10px 5px;border-radius: 3px;vertical-align: middle;text-align:center;
+    margin:20px 0px 20px 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+                    <article class="seasonss">
+                        <h3 class="dec"> Май  </h3>
+                        <p class="interline">
+                            Самый теплый май 15.9°C (1897)<br>
+
+                            Самый холодный май 2.1°C (1867)<br>
+
+                            Самый влажный май 127 мм (2003)<br>
+
+                            Самый сухой 2 мм (1842) <br>
+                        </p>
+                    </article>
+                </article>
+
+
+            </article>
+        </section>
+
+
+
+
+
+        @*<article class="seasons">
 
             <h3 class="dec"> Март </h3> <br><br>
 
@@ -95,53 +162,12 @@
 
             Самый сухой 2 мм (1842) <br>
 
-        </article>
+        </article>*@
 
-
-        <div id="everyDays">
-            <ul class="menu">
-                <li>
-                    <p class="menu-trigger" data-trigger="dropdown">Приметы мая на каждую декаду</p>
-                    <ul class=" submenu">
-                        <li><a href="#">с 1 по 10</a></li>
-                        <li><a href="#">с 11 по 20</a></li>
-                        <li>
-                            <a id="may" href="#">с 21 по 31</a>
-                            <div id="dropdowncontent">
-                                <a href="#" class="decada">21 мая: Дождливый день – к урожаю грибов</a>
-                                <a href="#" class="decada">22 мая: Дождь на Николу – к хорошему урожаю</a>
-                                <a href="#" class="decada">23 мая: Дождь в этот день сулит дождливое лето</a>
-                                <a href="#" class="decada">24 мая: Если 24 мая дождь, то ещё сорок дней будут дождливыми</a>
-                                <a href="#" class="decada">25 мая: Пасмурное утро – к дождливому и прохладному лету</a>
-                                <a href="#" class="decada">26 мая: Если в этот день появились комары, то летом будет много ягод</a>
-                                <a href="#" class="decada">27 мая: Пасмурная погода 27 мая - урожая не будет.</a>
-                                <a href="#" class="decada">28 мая: Много паутинок летает - жди жаркого лета</a>
-                                <a href="#" class="decada">29 мая: Гром сегодня - примета, что будет хороший урожай зерна</a>
-                                <a href="#" class="decada">30 мая: День дождливый и луна только зарождается — летом будет много осадков </a>
-                                <a href="#" class="decada">31 мая: Пар от земли идет – к дождю.</a>
-                            </div>
-                        </li>
-
-
-                </li>
-                <br />
-
-
-
-
-                </li>
-            </ul>
-
-        </div>
-
-
-
-
-        <br><br><br><br>
-
-
+        <br><br><br><br><br>
 
         <h2 class="primetav">ПОГОДНЫЕ ПРИМЕТЫ ВЕСНЫ</h2><br><br>
+
         <article>
             Жаворонок поет к теплу, а зяблик – к стуже.<br>
 
@@ -154,64 +180,15 @@
             Черемуха распускается – к холодной погоде.<br>
             Дуб распускается – к холодной погоде, заморозкам.<br>
             Береза распускается – через пять-шесть дней установится среднесуточная температура 10°C.<br>
-            Кукушка кукует часто и долго – потепление наступит.
-        </article>
+            Кукушка кукует часто и долго – потепление наступит.<br>
 
+            <button id="dalees">читать далее...</button><button id="skrits">скрыть...</button>
+            <br />
+            <br />
+            <div id="texts"></div>
 
-        <input type="checkbox" id="hd-1" class="hide" />
-        <label for="hd-1">читать далее</label>
-
-        <article>
-
-            Птицы садятся на землю – завтра тепло будет.<br>
-
-            Птицы сидят на нижних ветках деревьев – жди ветер.<br>
-
-            Вороны каркают стаей – к ненастью.<br>
-            Дождевые облака круглые – дождь будет кратковременный; дождевые облака плоские – дождь будет идти долго.<br>
-
-            Утром туман поднимается и образует облака – будет дождь, а коли туман падает на землю – будет сухо.<br>
-
-
-            Ранняя весна – летом много непогожих дней будет.<br>
-
-            Длинные сосульки – весна будет долгой.<br>
-
-            Рябина обильно цветет – сырая осень будет, а коли мало рябины – жди сухую осень.<br>
-
-            Позднее цветение рябины – к долгой и теплой осени.<br>
-
-            Кора на деревьях сильно потрескалась – хорошая погода без дождя продержится долго.<br>
-
-            Весна придет рано – готовься к ранней зиме.<br>
-
-            Коли снег тает быстро, а вода бежит обильно – к мокрому лету.<br>
-
-            Снег тает с северной стороны от муравейника – лето будет долгое и теплое, а с южной стороны от муравейника –
-            жди лето короткое и холодное.<br>
-            Весной дождей нет – будет дождливая осень.<br>
-
-            Весна очень теплая – жди холодное лето.<br>
-
-            Грачи прилетели – через месяц снег сойдет.<br>
-
-            Дикие утки прилетели упитанные – весна будет долгая и холодная.<br>
-
-            Птицы вьют гнезда на солнечной стороне – жди холодное лето.<br>
-
-            Много паутины летит – быть лету жарким.<br>
-
-            Из берёзы течет много сока – жди дождливое лето.<br>
-
-            Береза распустила листья раньше ольхи – сухое лето, ольха распустилась раньше березы – дождливое лето.<br>
-            Одуванчики зацвели ранней весной – лето будет коротким.<br>
 
         </article>
-        <br />
-        <br />
-        <input type="checkbox" id="hd-2" class="hide" />
-
-
 
 
     </main>
@@ -222,7 +199,7 @@
     </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Scripts/JavaScriptweather.js")
+    @Scripts.Render("~/Scripts/JavaScriptspring.js")
     @Scripts.Render("~/Scripts/JavaScriptweather2.js")
     <script charset="utf-8" src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
     @Scripts.Render("~/Scripts/jquery-3.3.1.min.js")

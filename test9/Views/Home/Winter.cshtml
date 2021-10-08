@@ -8,7 +8,7 @@
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
     @Styles.Render("~/Content/Site.css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/Scripts/JavaScriptweather.js")
+    @Scripts.Render("~/Scripts/JavaScriptwinter.js")
 
 
     <meta charset="utf-8">
@@ -22,43 +22,45 @@
 </head>
 
 <body>
-    <div id="context">
-        <ul class="context-menu">
 
-            <li><a href="#" class="hidden"> Назад</a></li>
-            <li><a href="#" class="hidden">Вперед</a></li>
-            <li><a href="#" class="hidden">Перезагрузить</a></li>
-            <li><a href="#" class="hidden">Сохранить как...</a></li>
-            <li><a href="#" class="hiddenimg">Изображение защищено авторским правом и его нельзя скачать</a></li>
+   
+    <header id="headerWinter">
 
-        </ul>
-    </div>
-    <header>
-        <img height="100%" src="@Url.Content("~/Content/image/zima.jpg")" class="center-img">
+        <div id="containerhWinter">
+            <div id="navWinter"><img height="250" src="@Url.Content("~/Content/image/zima.jpg")" class="center-img">   </div>
+            <div id="asideWinter">
+                <blockquote class="top">
+                    <br>
+                    <br>
+                    <br>
+                    <h2>
+                        "Узнавай же скорее декабрьский денек, <br>
+                        Где к зловещему дегтю подмешан желток..."
+                    </h2>
+
+                    <cite> Осип Мандельштам, 1930 </cite>
+                </blockquote>
+            </div>
+            <div id="contentWinter">
+            </div>
+        </div>
     </header>
-
     <main>
-        <blockquote class="top">
-            <h2>
-                "Узнавай же скорее декабрьский денек, <br>
-                Где к зловещему дегтю подмешан желток..."
-            </h2>
+        <br><br>
 
-            <cite> Осип Мандельштам, 1930 </cite>
-        </blockquote>
-
-        <article class="interline">
-            <p>
-                Самый теплый Новый год был в 1937 году: в новогоднюю ночь +2,9°С, а днем 1 января +3,5°С с дождем.<br>
-                Самый холодный день за историю наблюдений в Санкт-Петербурге случился 11 января 1883 года –35,9°C. А 17
-                января 1940 года – в Ленинграде была зафиксирована самая низкая в XX веке температура- столбики
-                термометров опустились до отметки минус 35,6 градуса<br>
-                Средняя температура января 1942 года составила –18,7°C (при норме –9°C)
-            </p> <br>
-
+        <article class="wrapper" style="width: 1530px;text-align:center;background-color:whitesmoke;vertical-align: middle; border-radius: 3px;padding :10px ;box-shadow: 0 0 20px rgba(0,0,0,0.2); ">
+            <article class="interline">
+                <p>
+                    Самый теплый Новый год был в 1937 году: в новогоднюю ночь +2,9°С, а днем 1 января +3,5°С с дождем.
+                    <br>
+                    Самый холодный день за историю наблюдений в Санкт-Петербурге случился 11 января 1883 года –35,9°C. А 17
+                    января 1940 года – в Ленинграде была зафиксирована самая низкая в XX веке температура- минус 35,6 градуса.
+                    <br>
+                    Средняя температура января 1942 года составила –18,7°C (при норме –9°C). <br>
+                </p>
+            </article>
         </article>
-
-        <article class="seasons">
+        @*<article class="seasons">
 
             <h3 class="dec"> Декабрь </h3> <br><br>
 
@@ -92,90 +94,99 @@
 
             Самый сухой февраль 3 мм (1886) <br><br>
 
-        </article>
-        <h2 class="primetaz">ПОГОДНЫЕ ПРИМЕТЫ ЗИМЫ</h2><br><br>
+        </article>*@
+        
         <section>
-            <article class="overflow">
-                На переломе зимы птицы сидят на верхушках деревьев – к потеплению; в начале и в разгар зимы птицы сидят
-                на верхушках деревьев – к морозу.<br>
+            <article class="wrapper" style="width: 1550px; border-radius: 3px;box-shadow: 0 0 20px rgba(0,0,0,0.2); ">
 
-                Воробьи громко чирикают – будет метель.<br>
+                <article style="float: left; width: 470px;height:130px;background-color:whitesmoke;padding: 0px 10px 5px;border-radius: 3px;vertical-align: middle;text-align:center;
+margin:20px 20px 20px 0px;box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+                    <article class="seasonss">
+                        <h3 class="dec"> Декабрь </h3>
+                        <p class="interline">
+                            Самый теплый декабрь 3.0°C (2006)<br>
 
-                Вороны и галки садятся на снег – жди оттепель.<br>
+                            Самый холодный декабрь -18.4°C (1788)<br>
 
-                Вороны дружно каркают – жди мороз.<br>
+                            Самый влажный декабрь 112 мм (1981)<br>
 
-                Мало звезд на небе – жди ненастье.<br>
+                            Самый сухой декабрь 4 мм (1852)<br>
+                        </p>
+                    </article>
+                </article>
 
-                Звезды на небе блестят ярко – к трескучему морозу.<br>
+                <article style="float: left; width: 470px;height:130px;background-color:whitesmoke;padding: 0px 10px 5px;border-radius: 3px;vertical-align: middle;text-align:center;
+    margin:20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+                    <article class="seasonss">
+                        <h3 class="dec"> Январь </h3>
+                        <p class="interline">
+                            Самый теплый январь 1.5°C (2020)<br>
 
-                Ясный Млечный путь зимой – к морозу, тусклый Млечный путь – к ненастью.<br>
+                            Самый холодный январь -21.5°C (1814)<br>
 
-                Облака плывут против ветра – к снегопаду.<br>
+                            Самый влажный январь 82 мм (2011)<br>
 
-                Эхо далеко раздается – морозы крепчают.<br>
+                            Самый сухой январь 0 мм (1836)
+                        </p><br>
+                        </p><br>
+                        </p>
+                    </article>
+                </article>
 
-                Туман зимой – к оттепели.<br>
+                <article style="float: left; width: 470px;height:130px;background-color:whitesmoke;padding: 0px 10px 5px;border-radius: 3px;vertical-align: middle;text-align:center;
+    margin:20px 0px 20px 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+                    <article class="seasonss">
+                        <h3 class="dec"> Февраль  </h3>
+                        <p class="interline">
+                            Самый теплый февраль 1.7°C (1990)<br>
 
-                Деревья стоят в инее - к потеплению.<br>
+                            Самый холодный февраль -19.5°C (1871)<br>
 
-                Снег налип на ветви деревьев – к продолжительному теплу.<br>
+                            Самый влажный февраль 92 мм (1990)<br>
 
-                Трескучий лед – к продолжительному морозу.<br>
+                            Самый сухой февраль 3 мм (1886) <br><br>
+                        </p>
+                    </article>
+                </article>
 
-                Дым столбом – к морозу, дым низко стелется по земле – к снегу и дождю.<br>
-
-                Иней на окне растет вверх – мороз простоит несколько дней; иней стал сгибаться вниз – к оттепели.<br>
-
-                Вороны и галки кричат беспрерывно – к снегопаду или метели.<br>
-
-                Вороны и галки вьются в воздухе – снег пойдет.<br>
-
-                Кошка сворачивается клубком в кресле– к похолоданию.<br>
-
-                Кошка мордочку прячет – к морозу или к вьюге.<br>
-
-                Кошка когти точит – жди метель.<br>
-
-                Кот по комнате бегает, играет – к морозу.<br>
-
-                Кошка крепко спит или ложится на спину – к потеплению.<br>
-
-                Кошка о ноги трется да в окно смотрит – жди потепление.<br>
-
-                Собака в снегу валяется – к метели.<br>
-
-                Природа зиму чередует: коли холодная была зима – следующая зима теплой будет.<br>
-
-                Большой снег в начале зимы – к обильным дождям в начале лета.<br>
-
-                Снег лег на сырую землю и не растаял – весной подснежники зацветут рано.<br>
-
-                Если снег выпал рано – жди ранний приход весны.<br>
-
-                Каков январь, таков и июль.<br>
-
-                Если в январе частые снегопады и метели – в июле жди частые дожди.<br>
-
-                Зима морозная – лето жаркое.<br>
-
-                Сухая и холодная зима ведет за собою сухое и жаркое лето.<br>
-
-                Зима была теплой – жди лето холодное.<br>
-
-                Холодная зима дружит с теплой весною.<br>
-
-                Снежная зима кличет сырое лето.<br>
-
-                Зимой звезды яркие – к знойному лету.<br>
-
-                Частые метели – к ненастному лету.<br>
-
-                Длинные сосульки – к длинной весне.<br>
 
             </article>
         </section>
 
+
+
+
+        <h2 class="primetaz">ПОГОДНЫЕ ПРИМЕТЫ ЗИМЫ</h2><br><br>
+
+        <article>
+            На переломе зимы птицы сидят на верхушках деревьев – к потеплению; в начале и в разгар зимы птицы сидят
+            на верхушках деревьев – к морозу.<br>
+
+            Воробьи громко чирикают – будет метель.<br>
+
+            Вороны и галки садятся на снег – жди оттепель.<br>
+
+            Вороны дружно каркают – жди мороз.<br>
+
+            Мало звезд на небе – жди ненастье.<br>
+
+            Звезды на небе блестят ярко – к трескучему морозу.<br>
+
+            Ясный Млечный путь зимой – к морозу, тусклый Млечный путь – к ненастью.<br>
+
+            Облака плывут против ветра – к снегопаду.<br>
+
+            Эхо далеко раздается – морозы крепчают.<br>
+
+            <button id="daleew">читать далее...</button><button id="skritw">скрыть...</button>
+            <br />
+            <br />
+            <div id="textw"></div>
+
+
+        </article>
     </main>
 
 
@@ -186,7 +197,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/Scripts/JavaScriptweather.js")
+    @Scripts.Render("~/Scripts/JavaScriptwinter.js")
     @Scripts.Render("~/Scripts/JavaScriptweather2.js")
     <script charset="utf-8" src="@Url.Content("~/Scripts/jquery-3.3.1.min.js")"></script>
     @Scripts.Render("~/Scripts/jquery-3.3.1.min.js")

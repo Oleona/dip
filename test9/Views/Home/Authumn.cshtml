@@ -25,41 +25,44 @@
 </head>
 
 <body>
-    <div id="context">
-        <ul class="context-menu">
 
-            <li><a href="#" class="hidden"> Назад</a></li>
-            <li><a href="#" class="hidden">Вперед</a></li>
-            <li><a href="#" class="hidden">Перезагрузить</a></li>
-            <li><a href="#" class="hidden">Сохранить как...</a></li>
-            <li><a href="#" class="hiddenimg">Изображение защищено авторским правом и его нельзя скачать</a></li>
+   
+    <header id="headerAuthumn">
 
-        </ul>
-    </div>
-    <header>
-        <img height="100%" src="@Url.Content("~/Content/image/osen.jpg")" class="center-img">
+        <div id="containerhAuthumn">
+            <div id="navAuthumn"><img height="250" src="@Url.Content("~/Content/image/osen.jpg")" class="center-img">   </div>
+            <div id="asideAuthumn">
+                <blockquote class="top">
+                    <br>
+                    <br>
+                    <br>
+                    <h2>
+                        "В этом мутном городе туманов, <br>
+                        В этой тусклой, безрассветной мгле..."
+                    </h2>
+                    <cite> Валерий Брюсов, 1913</cite>
+                </blockquote>
+            </div>
+            <div id="contentAuthumn">
+            </div>
+        </div>
     </header>
 
-
     <main>
-        <blockquote class="top">
-            <h2>
-                "В этом мутном городе туманов, <br>
-                В этой тусклой, безрассветной мгле..."
-            </h2>
-
-            <cite> Валерий Брюсов, 1913 </cite>
-        </blockquote>
-
         <br><br>
-        <article class="interline">
-            Первый заморозок в Петербурге бывает в среднем 10 октября, самый ранний отмечен 15 сентября 1944 года<br>
-            Абсолютный максимум осени +30,4 °C наблюдался 1 сентября 1992 года.<br>
-            Абсолютный минимум - -22,2 °C наблюдался 25 ноября 1890 года.
 
-        </article><br>
-
-        <article class="seasons">
+        <article class="wrapper" style="width: 1530px;text-align:center;background-color:whitesmoke;vertical-align: middle; border-radius: 3px;padding :10px ;box-shadow: 0 0 20px rgba(0,0,0,0.2); ">
+            <article class="interline">
+                <p>
+                    Первый заморозок в Петербурге бывает в среднем 10 октября, самый ранний отмечен 15 сентября 1944 года.
+                    <br>
+                    Абсолютный максимум осени +30,4 °C наблюдался 1 сентября 1992 года.
+                    <br>
+                    Абсолютный минимум - -22,2 °C наблюдался 25 ноября 1890 года. <br>
+                </p>
+            </article>
+        </article>
+        @*<article class="seasons">
 
             <h3 class="dec"> Сентябрь </h3> <br><br>
 
@@ -93,8 +96,69 @@
 
             Самый сухой ноябрь 2 мм (1862)<br>
 
-        </article>
+        </article>*@
+        <section>
+            <article class="wrapper" style="width: 1550px; border-radius: 3px;box-shadow: 0 0 20px rgba(0,0,0,0.2); ">
+
+                <article style="float: left; width: 470px;height:130px;background-color:whitesmoke;padding: 0px 10px 5px;border-radius: 3px;vertical-align: middle;text-align:center;
+margin:20px 20px 20px 0px;box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+                    <article class="seasonss">
+                        <h3 class="dec"> Сентябрь </h3>
+                        <p class="interline">
+                            Самый теплый сентябрь 14.9°C (1938)<br>
+
+                            Самый холодный сентябрь 7.0°C (1894)<br>
+
+                            Самый влажный сентябрь 190 мм (1767)<br>
+
+                            Самый сухой сентябрь 2 мм (1851)<br>
+                        </p>
+                    </article>
+                </article>
+
+                <article style="float: left; width: 470px;height:130px;background-color:whitesmoke;padding: 0px 10px 5px;border-radius: 3px;vertical-align: middle;text-align:center;
+    margin:20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+                    <article class="seasonss">
+                        <h3 class="dec"> Октябрь </h3>
+                        <p class="interline">
+                            Самый теплый октябрь 9.3°C (1775)<br>
+
+                            Самый холодный октябрь -0.5°C (1880)<br>
+
+                            Самый влажный октябрь 150 мм (1984)<br>
+
+                            Самый сухой октябрь 5 мм (1987)
+                        </p><br>
+                        
+
+                    </article>
+                </article>
+
+                <article style="float: left; width: 470px;height:130px;background-color:whitesmoke;padding: 0px 10px 5px;border-radius: 3px;vertical-align: middle;text-align:center;
+    margin:20px 0px 20px 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);">
+                    <article class="seasonss">
+                        <h3 class="dec"> Ноябрь  </h3>
+                        <p class="interline">
+                            Самый теплый ноябрь 4.4°C (2013)<br>
+
+                            Самый холодный ноябрь -10.0°C (1774)<br>
+
+                            Самый влажный ноябрь 118 мм (2010)<br>
+
+                            Самый сухой ноябрь 2 мм (1862)<br>
+                        </p><br>
+                        </p>
+                    </article>
+                </article>
+
+
+            </article>
+        </section>
+
         <h2 class="primetao">ПОГОДНЫЕ ПРИМЕТЫ ОСЕНИ</h2><br><br>
+
         <article>
             Осенний иней – к сухой, солнечной погоде.<br>
 
@@ -122,9 +186,6 @@
             <br />
             <div id="text"></div>
 
-            <br />
-            <br />
-            <div id="text"></div>
 
         </article>
 

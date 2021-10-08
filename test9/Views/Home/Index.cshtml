@@ -22,9 +22,9 @@
         <div class="logout">
             @if (User.Identity.IsAuthenticated)
             {
-                <a href="/Home/Logoff">logout   </a>
+                <a id="a" href="/Home/Logoff">logout   </a>
 
-                <a for=""> |  @User.Identity.Name </a>
+                <a id="aa" for=""> |  @User.Identity.Name </a>
 
             }
             else
