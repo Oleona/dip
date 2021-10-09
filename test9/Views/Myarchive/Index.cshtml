@@ -32,7 +32,7 @@
                         <tr>
                             <td rowspan="3"></td>
                             <th colspan="4">
-                                <h2>
+                                <h2 style="text-align:left;">
                                     Прогноз погоды на
                                     <script language="javascript" type="text/javascript">
 
@@ -43,9 +43,11 @@
 
                                         var month = new Array("января", "февраля", "марта", "апреля", "мая", "июня",
                                             "июля", "августа", "сентября", "октября", "ноября", "декабря");
-
-                                        document.write(day[d.getDay() + 1] + " " + (d.getDate() + 1) + " " + month[d.getMonth()]
+                                        
+                                        document.write(day[d.getDay() + 1] + " "  + (d.getDate() + 1) + " " + month[d.getMonth()]
                                             + " " + d.getFullYear() + " г.");
+                                        
+                                        
                                     </script>
                                 </h2>
                                 <div>

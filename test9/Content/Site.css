@@ -222,8 +222,10 @@ table:hover {
 .primetav, .primetao, .primetal, .primetaz {
     font-family: 'Pacifico';
     font-weight: bold;
+    text-align: center;
+    
 }
-
+ 
 
 
 
