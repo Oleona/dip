@@ -58,9 +58,9 @@
                                             if (@ViewBag.Resul[2].humi < 70)
                                             {
 <p>Днем ясно, без осадков</p>;
-                                        }
-                                        else if (70 <= @ViewBag.Resul[2].humi < 80)
-                                        {
+                                            }
+                                            else if (70 <= @ViewBag.Resul[2].humi&& @ViewBag.Resul[2].humi < 80)
+                                            {
                                             <p>Днем облачно, с прояснениями</p>;
                                         }
                                         else if (80 <= @ViewBag.Resul[2].humi < 90)
