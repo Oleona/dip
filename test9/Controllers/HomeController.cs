@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +13,17 @@ namespace test9.Controllers
 {
     public class HomeController : Controller
     {
+        // не получилось добавить в модель
+        public string GetMD5Hash(string Password)
+        {
+            if (Password == null) throw new ArgumentNullException(nameof(Password));
+            using (var md5 = MD5.Create())
+            {
+                return Convert.ToBase64String(md5.ComputeHash(Encoding.UTF8.GetBytes(Password)));
+            }
+        }
+        //
+
         public ActionResult Summer()
         {
             return View();
@@ -84,6 +97,7 @@ namespace test9.Controllers
                 User user = null;
                 using (WeatherContext db = new WeatherContext())
                 {
+                    model.Password = GetMD5Hash(model.Password);
                     user = db.Users.FirstOrDefault(u => u.Login == model.Name && u.Password == model.Password);
 
                 }
@@ -122,6 +136,7 @@ namespace test9.Controllers
                     // создаем нового пользователя
                     using (WeatherContext db = new WeatherContext())
                     {
+                        model.Password = GetMD5Hash(model.Password);
                         db.Users.Add(new User { Login = model.Name, Password = model.Password });
                         db.SaveChanges();
 
