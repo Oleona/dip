@@ -20,15 +20,46 @@ namespace test9.Controllers
         int humi0_3, humi6_9, humi12_15, humi18_21;
         double pres0_3, pres6_9, pres12_15, pres18_21;
         int srok;
+
         const double k1 = 1.05;//  верхний коэффициент для границ выборки из базы. Подобран опытным путем
         const double k2 = 0.95; // нижний
 
         //12 октября
-        double temperatureNight, temperatureMorning, temperatureDay, temperatureEvening;
-        int humidityNight, humidityMorning, humidityDay, humidityEvening;
-        double pressureNight, pressureMorning, pressureDay, pressureEvening;
+
+        double funkt;
+        int funkh;
+        double funkp;
+
+        public List<ResultForecast> PartForecast(List<Archive> f)
+        {
+            List<ResultForecast> resultForecast = new List<ResultForecast>();
+            funkt = 0; funkh = 0; funkp = 0;
+            foreach (Archive p in f)
+            {
+
+                if (p.Temperature.HasValue)
+                {
+                    funkt += p.Temperature.Value;
+                }
+                if (p.Humidity.HasValue)
+                {
+                    funkh += p.Humidity.Value;
+                }
+
+                if (p.Pressure.HasValue)
+                {
+                    funkp += p.Pressure.Value;
+                }
 
 
+            }
+            funkt = Math.Round(funkt / f.Count, 2);
+            funkh = funkh / f.Count;
+            funkp = Math.Round(funkp / f.Count, 2);
+            ResultForecast resultFor = new ResultForecast(funkt, funkh, funkp);
+            resultForecast.Add(resultFor);
+            return resultForecast;
+        }
         //12 октября конец
 
         // GET: Myarchive
@@ -104,7 +135,7 @@ namespace test9.Controllers
 
                 //12 октября  пробую сразу выбрать даты. Получили то же самое что dayMonthYear только сразу сгруппировано по 3
                 //  12 октября пробую разбить сразу на 4 прогноза на день по времени суток
-                
+
                 var dataDayMonthYear = db.Archives
                     .Where(t => temp <= t.Temperature * k1 && temp >= t.Temperature * k2)
                     .Where(t => humidity <= t.Humidity * k1 && humidity >= t.Humidity * k2)
@@ -120,6 +151,7 @@ namespace test9.Controllers
                 List<Archive> OneDayForMorningPrediction = new List<Archive>();
                 List<Archive> OneDayForDayPrediction = new List<Archive>();
                 List<Archive> OneDayForEveningPrediction = new List<Archive>();
+
                 List<Archive> forecastForNightPrediction = new List<Archive>();
                 List<Archive> forecastForMorningPrediction = new List<Archive>();
                 List<Archive> forecastForDayPrediction = new List<Archive>();
@@ -135,53 +167,31 @@ namespace test9.Controllers
                     OneDayForDayPrediction = db.Archives.Where(v => v.Day == myDayResult && v.Month == myMonthResult && v.Year == myYearResult && (v.Time == 12 || v.Time == 15)).ToList();
                     OneDayForEveningPrediction = db.Archives.Where(v => v.Day == myDayResult && v.Month == myMonthResult && v.Year == myYearResult && (v.Time == 18 || v.Time == 21)).ToList();
 
-                    foreach (Archive n in OneDayForNightPrediction)
-                    {
-                        forecastForNightPrediction.Add(n);
-                    }
-                    foreach (Archive n in OneDayForMorningPrediction)
-                    {
-                        forecastForMorningPrediction.Add(n);
-                    }
-                    foreach (Archive n in OneDayForDayPrediction)
-                    {
-                        forecastForDayPrediction.Add(n);
-                    }
-                    foreach (Archive n in OneDayForEveningPrediction)
-                    {
-                        forecastForEveningPrediction.Add(n);
-                    }
-
+                    OneDayForNightPrediction.ForEach(it => forecastForNightPrediction.Add(it));
+                    OneDayForMorningPrediction.ForEach(it => forecastForMorningPrediction.Add(it));
+                    OneDayForDayPrediction.ForEach(it => forecastForDayPrediction.Add(it));
+                    OneDayForEveningPrediction.ForEach(it => forecastForEveningPrediction.Add(it));
                 }
-                List<ResultForecast> resultForecast = new List<ResultForecast>();
-                
-                foreach (Archive p in forecastForNightPrediction)
+
+                List<ResultForecast> FullForecast = new List<ResultForecast>();
+
+                foreach (ResultForecast rf in PartForecast(forecastForNightPrediction))
                 {
-                    if (p.Temperature.HasValue)
-                    {
-                        temperatureNight += p.Temperature.Value;
-                    }
-                    if (p.Humidity.HasValue)
-                    {
-                        humidityNight += p.Humidity.Value;
-                    }
-
-                    if (p.Pressure.HasValue)
-                    {
-                        pressureNight += p.Pressure.Value;
-                    }
-
-
+                    FullForecast.Add(rf);
                 }
-                temperatureNight = Math.Round( temperatureNight / forecastForNightPrediction.Count );
-                humidityNight= humidityNight/ forecastForNightPrediction.Count ;
-                pressureNight = Math.Round( pressureNight / forecastForNightPrediction.Count);
-                ResultForecast resultFor = new ResultForecast(temperatureNight, humidityNight, pressureNight);
-                resultForecast.Add(resultFor);
-
-
-
-
+                foreach (ResultForecast rf in PartForecast(forecastForMorningPrediction))
+                {
+                    FullForecast.Add(rf);
+                }
+                foreach (ResultForecast rf in PartForecast(forecastForDayPrediction))
+                {
+                    FullForecast.Add(rf);
+                }
+                foreach (ResultForecast rf in PartForecast(forecastForEveningPrediction))
+                {
+                    FullForecast.Add(rf);
+                }
+                ViewBag.ResultFullForecast = FullForecast;
                 //12 октября конец блока
 
                 List<Result> res = new List<Result>();
@@ -351,4 +361,6 @@ namespace test9.Controllers
         }
 
     }
+
+
 }
