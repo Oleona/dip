@@ -154,4 +154,26 @@ namespace test9.Models
         public double pres { get; set; }
     }
 
+    //12 октября
+    class DayMonthYearResult
+    {
+        public int DayResult { get; set; }
+        public int MonthResult { get; set; }
+        public int YearResult { get; set; }
+    }
+    public class ResultForecast
+    {
+        public ResultForecast(double tempe, int humi, double pres)
+        {
+            this.tempe = tempe;
+            this.humi = humi;
+            this.pres = pres;
+           
+        }
+
+        
+        public double tempe { get; set; }
+        public int humi { get; set; }
+        public double pres { get; set; }
+    }
 }
