@@ -30,7 +30,7 @@ namespace test9.Controllers
         int funkh;
         double funkp;
 
-        public List<ResultForecast> PartForecast(List<Archive> f)
+        public List<ResultForecast> PartForecast(IEnumerable<Archive> f)
         {
             List<ResultForecast> resultForecast = new List<ResultForecast>();
             funkt = 0; funkh = 0; funkp = 0;
@@ -53,9 +53,9 @@ namespace test9.Controllers
 
 
             }
-            funkt = Math.Round(funkt / f.Count, 2);
-            funkh = funkh / f.Count;
-            funkp = Math.Round(funkp / f.Count, 2);
+            funkt = Math.Round(funkt / f.Count(), 2);
+            funkh = funkh / f.Count();
+            funkp = Math.Round(funkp / f.Count(), 2);
             ResultForecast resultFor = new ResultForecast(funkt, funkh, funkp);
             resultForecast.Add(resultFor);
             return resultForecast;
@@ -94,6 +94,8 @@ namespace test9.Controllers
                 double temp = Double.Parse(rawWeather.Main.Temp, CultureInfo.InvariantCulture);
                 double pressure = Double.Parse(rawWeather.Main.Pressure, CultureInfo.InvariantCulture);
 
+                // ниже старый блок
+
                 // выбираем из базы значения температуры, влажности, давления, отличающиеся от погоды на данный момент на 
                 // подобранный коэффициент с учетом времени ( не более часа в обе стороны разброс).
                 var data = db.Archives
@@ -131,68 +133,6 @@ namespace test9.Controllers
                         forecast.Add(n);
                     }
                 }
-
-
-                //12 октября  пробую сразу выбрать даты. Получили то же самое что dayMonthYear только сразу сгруппировано по 3
-                //  12 октября пробую разбить сразу на 4 прогноза на день по времени суток
-
-                var dataDayMonthYear = db.Archives
-                    .Where(t => temp <= t.Temperature * k1 && temp >= t.Temperature * k2)
-                    .Where(t => humidity <= t.Humidity * k1 && humidity >= t.Humidity * k2)
-                    .Where(t => pressure <= t.Pressure * k1 && pressure >= t.Pressure * k2)
-                    .Where(t => t.Time >= DateHour - 1 && t.Time <= DateHour + 1 ||
-                                DateHour + 1 == 24 && t.Time == 0)
-                    .ToList()
-                    .Select(t => new DayMonthYearResult { DayResult = t.Day.Value + 1, MonthResult = t.Month.Value, YearResult = t.Year.Value }).ToList();
-
-
-
-                List<Archive> OneDayForNightPrediction = new List<Archive>();
-                List<Archive> OneDayForMorningPrediction = new List<Archive>();
-                List<Archive> OneDayForDayPrediction = new List<Archive>();
-                List<Archive> OneDayForEveningPrediction = new List<Archive>();
-
-                List<Archive> forecastForNightPrediction = new List<Archive>();
-                List<Archive> forecastForMorningPrediction = new List<Archive>();
-                List<Archive> forecastForDayPrediction = new List<Archive>();
-                List<Archive> forecastForEveningPrediction = new List<Archive>();
-
-                for (int i = 0; i < dataDayMonthYear.Count; i++)
-                {
-                    var myDayResult = dataDayMonthYear[i].DayResult;
-                    var myMonthResult = dataDayMonthYear[i].MonthResult;
-                    var myYearResult = dataDayMonthYear[i].YearResult;
-                    OneDayForNightPrediction = db.Archives.Where(v => v.Day == myDayResult && v.Month == myMonthResult && v.Year == myYearResult && (v.Time == 0 || v.Time == 3)).ToList();
-                    OneDayForMorningPrediction = db.Archives.Where(v => v.Day == myDayResult && v.Month == myMonthResult && v.Year == myYearResult && (v.Time == 6 || v.Time == 9)).ToList();
-                    OneDayForDayPrediction = db.Archives.Where(v => v.Day == myDayResult && v.Month == myMonthResult && v.Year == myYearResult && (v.Time == 12 || v.Time == 15)).ToList();
-                    OneDayForEveningPrediction = db.Archives.Where(v => v.Day == myDayResult && v.Month == myMonthResult && v.Year == myYearResult && (v.Time == 18 || v.Time == 21)).ToList();
-
-                    OneDayForNightPrediction.ForEach(it => forecastForNightPrediction.Add(it));
-                    OneDayForMorningPrediction.ForEach(it => forecastForMorningPrediction.Add(it));
-                    OneDayForDayPrediction.ForEach(it => forecastForDayPrediction.Add(it));
-                    OneDayForEveningPrediction.ForEach(it => forecastForEveningPrediction.Add(it));
-                }
-
-                List<ResultForecast> FullForecast = new List<ResultForecast>();
-
-                foreach (ResultForecast rf in PartForecast(forecastForNightPrediction))
-                {
-                    FullForecast.Add(rf);
-                }
-                foreach (ResultForecast rf in PartForecast(forecastForMorningPrediction))
-                {
-                    FullForecast.Add(rf);
-                }
-                foreach (ResultForecast rf in PartForecast(forecastForDayPrediction))
-                {
-                    FullForecast.Add(rf);
-                }
-                foreach (ResultForecast rf in PartForecast(forecastForEveningPrediction))
-                {
-                    FullForecast.Add(rf);
-                }
-                ViewBag.ResultFullForecast = FullForecast;
-                //12 октября конец блока
 
                 List<Result> res = new List<Result>();
                 int countTime0_3 = 0;//считает данные для прогоза на ночь- на 0 и 3 часа ночи
@@ -327,6 +267,63 @@ namespace test9.Controllers
                 countTime18_21 = 0;
                 ViewBag.Resul = res;
 
+
+
+                //  12 октября пробую разбить сразу на 4 прогноза на день по времени суток
+
+                //Выбираем из базы значения температуры, влажности, давления, отличающиеся от погоды на данный момент на 
+                // подобранный коэффициент с учетом времени ( не более часа в обе стороны разброс). Из этой выборки находим даты,
+                // в которые погода совпадала с текущей и выбираем даты на 1 больше- так как прогноз нужен на следующий день
+                var dataDayMonthYear = db.Archives
+                    .Where(t => temp <= t.Temperature * k1 && temp >= t.Temperature * k2)
+                    .Where(t => humidity <= t.Humidity * k1 && humidity >= t.Humidity * k2)
+                    .Where(t => pressure <= t.Pressure * k1 && pressure >= t.Pressure * k2)
+                    .Where(t => t.Time >= DateHour - 1 && t.Time <= DateHour + 1 ||
+                                DateHour + 1 == 24 && t.Time == 0)
+                    //.ToList()
+                    .Select(t => new DayMonthYearResult { DayResult = t.Day.Value + 1, MonthResult = t.Month.Value, YearResult = t.Year.Value })
+                    .ToList();
+
+                var forecastForNightPrediction = new List<Archive>();
+                List<Archive> forecastForMorningPrediction = new List<Archive>();
+                List<Archive> forecastForDayPrediction = new List<Archive>();
+                List<Archive> forecastForEveningPrediction = new List<Archive>();
+
+                for (int i = 0; i < dataDayMonthYear.Count; i++)
+                {
+                    var myDayResult = dataDayMonthYear[i].DayResult;
+                    var myMonthResult = dataDayMonthYear[i].MonthResult;
+                    var myYearResult = dataDayMonthYear[i].YearResult;
+
+                    // Выборка из базы это прогноз суточный для ночи, дня и т.д ( 4 периода) каждого из дней,
+                    // которые подошли для прогноза. Потом для каждого объединяем в 4 общих-
+                    //  на ночь всех суток, утро всех суток, день всех суток, вечер всех суток из выборки
+                    db.Archives
+                        .Where(v => v.Day == myDayResult && v.Month == myMonthResult && v.Year == myYearResult && (v.Time == 0 || v.Time == 3))
+                        .ToList()
+                        .ForEach(it => forecastForNightPrediction.Add(it));
+
+
+
+                    db.Archives.Where(v => v.Day == myDayResult && v.Month == myMonthResult && v.Year == myYearResult && (v.Time == 6 || v.Time == 9))
+                        .ToList().ForEach(it => forecastForMorningPrediction.Add(it));
+                    db.Archives.Where(v => v.Day == myDayResult && v.Month == myMonthResult && v.Year == myYearResult && (v.Time == 12 || v.Time == 15))
+                        .ToList().ForEach(it => forecastForDayPrediction.Add(it));
+                    db.Archives.Where(v => v.Day == myDayResult && v.Month == myMonthResult && v.Year == myYearResult && (v.Time == 18 || v.Time == 21))
+                        .ToList().ForEach(it => forecastForEveningPrediction.Add(it));
+                }
+
+                List<ResultForecast> FullForecast = new List<ResultForecast>();
+                // Находим средние значения, как наш прогноз, для 4 частей суток, записываем в общий прогноз
+                PartForecast(forecastForNightPrediction).ForEach(it => FullForecast.Add(it));
+                PartForecast(forecastForMorningPrediction).ForEach(it => FullForecast.Add(it));
+                PartForecast(forecastForDayPrediction).ForEach(it => FullForecast.Add(it));
+                PartForecast(forecastForEveningPrediction).ForEach(it => FullForecast.Add(it));
+
+                ViewBag.ResultFullForecast = FullForecast;
+                //12 октября конец блока
+
+
                 // готовим строку для записи результата прогноза в базу
                 StringBuilder resultToBase = new StringBuilder();
                 foreach (Result r in res)
@@ -349,8 +346,28 @@ namespace test9.Controllers
                 request.ForecastId = newForecast.Id;
                 await db.SaveChangesAsync();
 
+                // 12 октября
+                StringBuilder writeForecastInBase = new StringBuilder();
+                foreach (ResultForecast rf in FullForecast)
+                {
+                    writeForecastInBase.Append(rf.tempe.ToString() + " ");
+                    writeForecastInBase.Append(rf.pres.ToString() + " ");
+                    writeForecastInBase.Append(rf.humi.ToString() + " ");
+                }
+                var writeForecast = writeForecastInBase.ToString();
+                var newWriteForecast = new Forecast { Prediction = writeForecast };
+                db.Forecasts.Add(newWriteForecast);
+                var newuserId = db.Users.Where(u => u.Login == User.Identity.Name).Select(u => u.Id).SingleOrDefault();
+                var newrequest = new Request { UserId = newuserId };
+                db.Requests.Add(newrequest);
+                await db.SaveChangesAsync();
+                newrequest.ForecastId = newForecast.Id;// нью или просто?
+                await db.SaveChangesAsync();
+                // 12 октября конец
 
                 return View(res);
+                //  return View(FullForecast);
+
             }
             else
             {
@@ -358,8 +375,12 @@ namespace test9.Controllers
                 return RedirectToAction("Login", "Home");
             }
 
-        }
 
+        }
+        private bool representEqualDates(Archive archive, DayMonthYearResult res)
+            => res.DayResult == archive.Day && res.MonthResult == archive.Month && res.YearResult == archive.Year;
+
+        private bool isMorning(Archive archive) => archive.Time == 0 || archive.Time == 3;
     }
 
 
