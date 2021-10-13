@@ -53,17 +53,17 @@
                                 <div>
                                     <h3>
 
-                                        @if (ViewBag.Resul != null)
+                                        @if (ViewBag.ResultFullForecast != null)
                                         {
-                                            if (@ViewBag.Resul[2].humi < 70)
+                                            if (@ViewBag.ResultFullForecast[2].humi < 70)
                                             {
                                                 <p>Днем ясно, без осадков</p>;
                                             }
-                                            else if (70 <= @ViewBag.Resul[2].humi && @ViewBag.Resul[2].humi < 80)
+                                            else if (70 <= @ViewBag.ResultFullForecast[2].humi && @ViewBag.ResultFullForecast[2].humi < 80)
                                             {
                                                 <p>Днем облачно, с прояснениями</p>;
                                             }
-                                            else if (80 <= @ViewBag.Resul[2].humi && @ViewBag.Resul[2].humi < 90)
+                                            else if (80 <= @ViewBag.ResultFullForecast[2].humi && @ViewBag.ResultFullForecast[2].humi < 90)
                                             {
                                                 <p>Днем пасмурно, в отдельных районах возможен кратковременный дождь</p>;
                                             }
@@ -84,29 +84,29 @@
                         <th>день</th>
                         <th>вечер</th>
                 </thead>
-                @if (ViewBag.Resul != null)
+                @if (ViewBag.ResultFullForecast != null)
                 {
                     <tbody>
                         <tr>
                             <td>температура</td>
-                            <td>@ViewBag.Resul[0].tempe</td>
-                            <td>@ViewBag.Resul[1].tempe</td>
-                            <td>@ViewBag.Resul[2].tempe</td>
-                            <td>@ViewBag.Resul[3].tempe</td>
+                            <td>@ViewBag.ResultFullForecast[0].tempe</td>
+                            <td>@ViewBag.ResultFullForecast[1].tempe</td>
+                            <td>@ViewBag.ResultFullForecast[2].tempe</td>
+                            <td>@ViewBag.ResultFullForecast[3].tempe</td>
                         </tr>
                         <tr>
                             <td>давление</td>
-                            <td>@ViewBag.Resul[0].pres</td>
-                            <td>@ViewBag.Resul[1].pres</td>
-                            <td>@ViewBag.Resul[2].pres</td>
-                            <td>@ViewBag.Resul[3].pres</td>
+                            <td>@ViewBag.ResultFullForecast[0].pres</td>
+                            <td>@ViewBag.ResultFullForecast[1].pres</td>
+                            <td>@ViewBag.ResultFullForecast[2].pres</td>
+                            <td>@ViewBag.ResultFullForecast[3].pres</td>
                         </tr>
                         <tr>
                             <td>влажность</td>
-                            <td>@ViewBag.Resul[0].humi</td>
-                            <td>@ViewBag.Resul[1].humi</td>
-                            <td>@ViewBag.Resul[2].humi</td>
-                            <td>@ViewBag.Resul[3].humi</td>
+                            <td>@ViewBag.ResultFullForecast[0].humi</td>
+                            <td>@ViewBag.ResultFullForecast[1].humi</td>
+                            <td>@ViewBag.ResultFullForecast[2].humi</td>
+                            <td>@ViewBag.ResultFullForecast[3].humi</td>
                         </tr>
                     </tbody>
                 }
