@@ -135,6 +135,7 @@ namespace test9.Controllers
                 ViewBag.ResultFullForecast = FullForecast;
                 
                 StringBuilder writeForecastInBase = new StringBuilder();
+                writeForecastInBase.Append(DateTime.Now.ToString("MM/dd/yyyy HH:mm") + " ");
                 foreach (ResultForecast rf in FullForecast)
                 {
                     writeForecastInBase.Append(rf.tempe.ToString() + " ");
