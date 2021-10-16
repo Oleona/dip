@@ -37,9 +37,9 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Password, new {  @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Password)
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "от 8 букв и цифр разных регистров", pattern = "[A-Za-z0-9]{8,}" } })
                     @Html.ValidationMessageFor(model => model.Password)
                 </div>
             </div>
