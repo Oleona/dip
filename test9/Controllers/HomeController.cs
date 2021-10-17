@@ -14,15 +14,22 @@ namespace test9.Controllers
     public class HomeController : Controller
     {
         // не получилось добавить в модель
-        public string GetMD5Hash(string Password)
-        {
-            if (Password == null) throw new ArgumentNullException(nameof(Password));
-            using (var md5 = MD5.Create())
-            {
-                return Convert.ToBase64String(md5.ComputeHash(Encoding.UTF8.GetBytes(Password)));
-            }
-        }
+        //public string GetMD5Hash(string Password)
+        //{
+        //    if (Password == null) throw new ArgumentNullException(nameof(Password));
+        //    using (var md5 = MD5.Create())
+        //    {
+        //        return Convert.ToBase64String(md5.ComputeHash(Encoding.UTF8.GetBytes(Password)));
+        //    }
+        //}
         //
+        static string Hash(string input)
+        {
+            var hash = new SHA1Managed().ComputeHash(Encoding.UTF8.GetBytes(input));
+            return string.Concat(hash.Select(b => b.ToString("x2")));
+        }
+
+
 
         public ActionResult Summer()
         {
@@ -97,7 +104,7 @@ namespace test9.Controllers
                 User user = null;
                 using (WeatherContext db = new WeatherContext())
                 {
-                    model.Password = GetMD5Hash(model.Password);
+                    model.Password = Hash(model.Password);
                     user = db.Users.FirstOrDefault(u => u.Login == model.Name && u.Password == model.Password);
 
                 }
@@ -136,7 +143,7 @@ namespace test9.Controllers
                     // создаем нового пользователя
                     using (WeatherContext db = new WeatherContext())
                     {
-                        model.Password = GetMD5Hash(model.Password);
+                        model.Password = Hash(model.Password);
                         db.Users.Add(new User { Login = model.Name, Password = model.Password });
                         db.SaveChanges();
 
